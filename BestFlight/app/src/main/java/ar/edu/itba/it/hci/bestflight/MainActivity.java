@@ -2,6 +2,7 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity
             Fragment fragment = new SettingsFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
+        }else if (id == R.id.nav_map) {
+            Intent i = new Intent(this, MapsActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

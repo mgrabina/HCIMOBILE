@@ -16,7 +16,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="hello status fragment" />
+            android:fontFamily="serif-monospace"
+            android:text="Status"
+            android:textAlignment="center"
+            android:textSize="50sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </FrameLayout>
