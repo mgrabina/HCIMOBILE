@@ -5,9 +5,18 @@
     tools:context="ar.edu.itba.it.hci.bestflight.StatusFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello status fragment" />
+        android:orientation="horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="hello status fragment" />
+    </LinearLayout>
 
 </FrameLayout>

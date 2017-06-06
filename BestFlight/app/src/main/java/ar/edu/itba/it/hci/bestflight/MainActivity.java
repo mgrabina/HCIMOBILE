@@ -39,9 +39,7 @@ public class MainActivity extends AppCompatActivity
 
 
         fragmentManager = getFragmentManager();
-        Fragment fragment = new MainFragment();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "mainFragment").addToBackStack("mainFragment").commit();
-
+       
     }
 
     @Override

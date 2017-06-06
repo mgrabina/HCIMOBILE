@@ -5,9 +5,17 @@
     tools:context="ar.edu.itba.it.hci.bestflight.DealsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello deals fragment" />
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="hello deals fragment" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -8,6 +8,12 @@
     tools:context="ar.edu.itba.it.hci.bestflight.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="385dp"
@@ -16,4 +22,5 @@
         tools:layout_editor_absoluteY="-1dp">
 
     </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>
