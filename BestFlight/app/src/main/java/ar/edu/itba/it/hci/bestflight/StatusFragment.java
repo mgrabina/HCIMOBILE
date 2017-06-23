@@ -65,10 +65,10 @@ public class StatusFragment extends Fragment {
                 try {
 
                     // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
-                   // for(int i=0; i<response.getJSONArray("airlines").length(); i++) {
-                   //     airlinesId.add((response.getJSONArray("airlines").getJSONObject(i)).getString("id"));
-                   //
-                   // }
+                   for(int i=0; i<response.getJSONArray("airlines").length(); i++) {
+                        airlinesId.add((response.getJSONArray("airlines").getJSONObject(i)).getString("id"));
+
+                    }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "error" , Toast.LENGTH_LONG).show();
