@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,26 +37,32 @@ public class DealsFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_deals, container, false);
     }
-
+    ArrayAdapter<String> adapter3;
     ArrayAdapter<String> adapter2;
     ArrayAdapter<String> adapter;
+    private ArrayList<String> cities=new ArrayList<>();
+    private ArrayList<String> citiesid=new ArrayList<>();
+    private ArrayList<String> dealscities=new ArrayList<>();
+    private ProgressDialog progressDialog;
+
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ListView l = (ListView) getActivity().findViewById(R.id.list);
         final Spinner s= (Spinner) getActivity().findViewById(R.id.spinner);
-        adapter2=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, cities2);
+        adapter2=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dealscities);
         adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
         s.setAdapter(adapter2);
         l.setAdapter(adapter);
         getCities();
-        s.setSelection(1);
         getDeals("BUE");
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Si selecciono uno
-               adapter.clear();
-                getDeals(s.getSelectedItem().toString());
+                String ids="";
+                ids=citiesid.get(position);
+                adapter.clear();
+                getDeals(ids);
             }
 
             @Override
@@ -65,11 +72,8 @@ public class DealsFragment extends Fragment {
         });
 
     }
-    private ArrayList<String> cities2=new ArrayList<>();
-    private ArrayList<String> cities=new ArrayList<>();
-    private ProgressDialog progressDialog;
 
-    private void getDeals(String citi) {
+    private void getDeals(final String citi) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
         progressDialog.setCancelable(false);
@@ -86,12 +90,11 @@ public class DealsFragment extends Fragment {
 
                     // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
                     for (int i = 0; i < response.getJSONArray("deals").length(); i++) {
-                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("id"));
-
+                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name"));
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "error"+ citi, Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                 }
 
@@ -99,7 +102,7 @@ public class DealsFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "error"+ citi, Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
@@ -124,9 +127,11 @@ public class DealsFragment extends Fragment {
 
                     // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
                     for (int i = 0; i < response.getJSONArray("cities").length(); i++) {
-                        adapter2.add((response.getJSONArray("cities").getJSONObject(i)).getString("id"));
-
+                        cities.add((response.getJSONArray("cities").getJSONObject(i)).getString("name"));
+                        adapter2.add((response.getJSONArray("cities").getJSONObject(i)).getString("name"));
+                        citiesid.add((response.getJSONArray("cities").getJSONObject(i)).getString("id"));
                     }
+
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "error2", Toast.LENGTH_LONG).show();
