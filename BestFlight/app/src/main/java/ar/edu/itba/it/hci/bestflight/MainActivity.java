@@ -16,10 +16,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fragmentManager;
+    private ArrayList<String> airlinesTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,12 @@ public class MainActivity extends AppCompatActivity
 
 
         fragmentManager = getFragmentManager();
-       
+
     }
+
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -81,4 +88,11 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
 }
+
+
+
