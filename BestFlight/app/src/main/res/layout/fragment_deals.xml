@@ -5,17 +5,24 @@
     tools:context="ar.edu.itba.it.hci.bestflight.DealsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/white">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView3"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="hello deals fragment" />
+            android:layout_height="52dp"
+            android:layout_weight="0.01" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="521dp"
+            android:layout_weight="0.03" />
+
     </LinearLayout>
 
 </FrameLayout>
