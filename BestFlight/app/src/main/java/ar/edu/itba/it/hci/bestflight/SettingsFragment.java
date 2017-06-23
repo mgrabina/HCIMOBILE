@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -90,6 +92,19 @@ public class SettingsFragment extends Fragment {
                     displayLanguage = "ES";
                 else
                     displayLanguage = "EN";
+            }
+        });
+
+        ListView alertsList = (ListView) getActivity().findViewById(R.id.alertsList);
+        ArrayList<Alert> a = AlertManager.getAlerts();
+        ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, a);
+        alertsList.setAdapter(adapt);
+        alertsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Si clickeo un item.
+                //Borrar item
+                //AlertManager.removeAlert(flight, airline);
             }
         });
 
