@@ -236,7 +236,7 @@ public class StatusFragment extends Fragment {
 
         if( AlertManager.getNotificationsMap().containsKey(flightA.id)){
 
-            AlertManager.removeAlert(flightA.id);
+            AlertManager.removeAlert(flightA.id, getContext());
             fabAddNot.setImageResource(R.drawable.aiportgreen);
             Toast.makeText(getActivity(), "removed", Toast.LENGTH_LONG).show();
 

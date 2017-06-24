@@ -32,7 +32,6 @@ public class AlertManager extends Application {
 
     private static HashMap<Integer, Flight> notificationsMap = new HashMap<Integer, Flight>();
 
-    private static Context context;
 
 
 
@@ -71,7 +70,7 @@ public class AlertManager extends Application {
 
 
 
-    public static void removeAlert(Integer id){
+    public static void removeAlert(Integer id, Context context){
 
         Flight fl = notificationsMap.get(id);
 
@@ -81,6 +80,13 @@ public class AlertManager extends Application {
         //
 
         notificationsMap.remove(id);
+
+        Gson gson = new Gson();
+        MapWrapper wrapper = new MapWrapper();
+        wrapper.myMap = notificationsMap;
+        String serializedMap = gson.toJson(wrapper);
+
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
 
 
 

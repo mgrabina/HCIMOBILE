@@ -242,6 +242,13 @@ public class MainActivity extends AppCompatActivity
             HashMap<Integer, Flight> map = wrapper.myMap;
             AlertManager.setNotificationsMap(map);
 
+            ArrayList<Alert> a = new ArrayList<Alert>();
+            for(Integer id : AlertManager.getNotificationsMap().keySet()){
+                AlertManager.getAlerts().add(new Alert(AlertManager.getNotificationsMap().get(id).flightNumber, AlertManager.getNotificationsMap().get(id).airline) );
+
+            }
+
+
         }
     }
 

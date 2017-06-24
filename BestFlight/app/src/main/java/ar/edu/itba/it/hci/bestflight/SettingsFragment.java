@@ -123,7 +123,7 @@ public class SettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Si clickeo un item.
                 //Borrar item
-                AlertManager.removeAlert(position);
+                AlertManager.removeAlert(position, getContext());
                 MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
                 
             }
