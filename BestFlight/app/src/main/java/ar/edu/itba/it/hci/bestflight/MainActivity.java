@@ -113,8 +113,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
         }else if (id == R.id.nav_map) {
-            Intent i = new Intent(this, MapsActivity.class);
-            startActivity(i);
+           // Intent i = new Intent(this, MapsActivity.class);
+           // startActivity(i);
+            Fragment fragment = new MapsFragment();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "mapsFragment").addToBackStack("mapsFragment").commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

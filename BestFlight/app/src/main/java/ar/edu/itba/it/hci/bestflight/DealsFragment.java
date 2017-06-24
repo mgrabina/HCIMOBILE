@@ -79,6 +79,8 @@ public class DealsFragment extends Fragment {
         progressDialog.setCancelable(false);
         progressDialog.show();
 
+
+
         String url = "http://hci.it.itba.edu.ar/v1/api/booking.groovy?method=getflightdeals&from="+citi;
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -107,6 +109,7 @@ public class DealsFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+        progressDialog.dismiss();
     }
 
 
@@ -148,5 +151,6 @@ public class DealsFragment extends Fragment {
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
     }
+
 
 }

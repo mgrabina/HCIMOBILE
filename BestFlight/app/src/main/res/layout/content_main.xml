@@ -12,15 +12,21 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
 
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="385dp"
         android:layout_height="518dp"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-1dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-4dp">
 
     </FrameLayout>
+
+
+
 
 </android.support.constraint.ConstraintLayout>
