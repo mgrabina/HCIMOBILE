@@ -1,19 +1,39 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.Application;
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.IBinder;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by juan on 6/23/2017.
  */
 
-public class AlertManager {
+public class AlertManager extends Application {
     private static ArrayList<Alert> alerts = new ArrayList<Alert>();
 
 
     private static HashMap<Integer, Flight> notificationsMap = new HashMap<Integer, Flight>();
+
+    private static Context context;
+
 
 
     //singleton
@@ -29,9 +49,20 @@ public class AlertManager {
 
 
 
-    public static void addAlert(Flight flight){
+    public static void addAlert(Flight flight, Context context){
 
         notificationsMap.put(flight.id, flight);
+        //
+
+
+        Gson gson = new Gson();
+        MapWrapper wrapper = new MapWrapper();
+        wrapper.myMap = notificationsMap;
+        String serializedMap = gson.toJson(wrapper);
+
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
+
+
 
 
         //
@@ -67,6 +98,10 @@ public class AlertManager {
 
     public static HashMap<Integer, Flight> getNotificationsMap() {
         return notificationsMap;
+    }
+
+    public static void setNotificationsMap(HashMap<Integer, Flight> map) {
+        notificationsMap.putAll(map);
     }
 
 }

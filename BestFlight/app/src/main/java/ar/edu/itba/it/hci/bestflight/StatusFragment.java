@@ -242,7 +242,7 @@ public class StatusFragment extends Fragment {
 
         }
         else{
-            AlertManager.addAlert(flightA);
+            AlertManager.addAlert(flightA, getContext());
             fabAddNot.setImageResource(R.drawable.aiportred);
             Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
 

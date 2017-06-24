@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -28,8 +29,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,7 +77,12 @@ public class MainActivity extends AppCompatActivity
 
 
         fragmentManager = getFragmentManager();
+        AlertManager.getInstance();
+
+
+
     //
+        updateNotificationsMap();
 
         //Bundle bundl = new Bundle();
         //bundl.putString("airlineId", "id");
@@ -220,6 +229,20 @@ public class MainActivity extends AppCompatActivity
 
     public static void AddtoBackStack(Fragment fragment, String tag) {backStackAdd(fragment, tag); }
     public static void popBackstack() { fragmentManager.popBackStack(); }
+
+
+    public void updateNotificationsMap(){
+        String serializedMap = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("NotificationsMap", "empty");
+
+        if(!serializedMap.equals("empty")) {
+            //Log.d("ENTRO", serializedMap);
+            Gson gson = new Gson();
+            MapWrapper wrapper = gson.fromJson(serializedMap, MapWrapper.class);
+            HashMap<Integer, Flight> map = wrapper.myMap;
+            AlertManager.setNotificationsMap(map);
+
+        }
+    }
 
 }
 

@@ -10,10 +10,13 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +33,21 @@ public class AlertsCheck extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        String serializedMap = PreferenceManager.getDefaultSharedPreferences(context).getString("NotificationsMap", "empty");
 
-        startNotification(context);
+        if(!serializedMap.equals("empty")) {
+          // Log.d("ENTRO", serializedMap);
+           Gson gson = new Gson();
+           MapWrapper wrapper = gson.fromJson(serializedMap, MapWrapper.class);
+           HashMap<Integer, Flight> map = wrapper.myMap;
+           this.map = map;
+
+
+
+           startNotification(context);
+       }
+       //else
+       //     Log.d("NO-ENTRO", serializedMap);
     }
 
 
@@ -43,7 +59,7 @@ public class AlertsCheck extends BroadcastReceiver {
 
     public void startNotification(Context context) {
 
-        map = AlertManager.getNotificationsMap();
+       // map = AlertManager.getNotificationsMap();
 
         for (Integer id : map.keySet()) {
 
@@ -55,8 +71,8 @@ public class AlertsCheck extends BroadcastReceiver {
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
 
-            String airline = AlertManager.getNotificationsMap().get(id).airline;
-            String flightNumber = AlertManager.getNotificationsMap().get(id).flightNumber.toString();
+            String airline = map.get(id).airline;
+            String flightNumber = map.get(id).flightNumber.toString();
             resultIntent.putExtra("airline", airline);
             resultIntent.putExtra("flightNumber", flightNumber);
 
