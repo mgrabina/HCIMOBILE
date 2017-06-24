@@ -1,5 +1,6 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -51,7 +52,7 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        displayLanguage = Locale.getDefault().getDisplayLanguage();
+
         getActivity().setTitle(getResources().getString(R.string.settings_title));
 
         final Spinner s = (Spinner) getActivity().findViewById(R.id.selectorDeTiempo);
@@ -125,6 +126,40 @@ public class SettingsFragment extends Fragment {
                 //AlertManager.removeAlert(flight, airline);
             }
         });
+
+    }
+
+    public static void checkLanguage(String displayLanguage, Activity a, Fragment current, String currentFragment, Context c) {
+        Log.e("Idioma de entrada", displayLanguage);
+        if (displayLanguage == "en" && !EN){
+            Locale locale = new Locale("en");
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            a.getBaseContext().getResources().updateConfiguration(config, a.getBaseContext().getResources().getDisplayMetrics());
+
+            displayLanguage = "EN";
+
+            EN = true;
+            if(current != null)
+                MainActivity.rebootFragment(current, currentFragment);
+        }else if(displayLanguage == "es" && EN){
+            Locale locale = new Locale("es");
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            a.getBaseContext().getResources().updateConfiguration(config, a.getBaseContext().getResources().getDisplayMetrics());
+
+            displayLanguage = "ES";
+            EN = false;
+            if(current != null)
+                MainActivity.rebootFragment(current, currentFragment);
+        }else{
+            Log.e("Entro","aa");
+
+            //No hago nada
+        }
+
 
     }
 }
