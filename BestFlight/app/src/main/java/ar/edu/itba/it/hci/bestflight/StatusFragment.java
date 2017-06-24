@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class StatusFragment extends Fragment {
     private Map<String, String> airlinesMap;
     ArrayAdapter<String> adapter;
     List<String> airlines;
+    private LinearLayout resultLayout;
 
 
 
@@ -81,6 +83,9 @@ public class StatusFragment extends Fragment {
                 }
             });
 
+
+            resultLayout = (LinearLayout) getView().findViewById(R.id.resultLayout);
+            resultLayout.setVisibility(View.GONE);
         }
 
 
@@ -117,10 +122,12 @@ public class StatusFragment extends Fragment {
                    if (response.has("status") ) {
 
                        String status = response.getJSONObject("status").getString("status");
+                       showResult();
 
                    }
                    else{
                        Toast.makeText(getActivity(), response.getJSONObject("error").getString("message") , Toast.LENGTH_LONG).show();
+                       resultLayout.setVisibility(View.GONE);
                    }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
@@ -184,6 +191,14 @@ public class StatusFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+    }
+
+
+    private void showResult(){
+
+        resultLayout.setVisibility(View.VISIBLE);
+
+
     }
 
 }
