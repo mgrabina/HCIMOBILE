@@ -204,7 +204,6 @@ public class MainActivity extends AppCompatActivity
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
-
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,

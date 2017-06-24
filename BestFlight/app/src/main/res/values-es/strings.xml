@@ -6,7 +6,7 @@
 
     <string name="navigation_drawer_open">Abrir Menu de Navegacion</string>
     <string name="navigation_drawer_close">Cerrar Menu de Navegacion</string>
-
+    <string name="toast_error_gps">Hubo un error con el gps. Cargando ofertas desde BS AS</string>
     <string name="action_settings">Configuraciones</string>
     <string name="alerts_text_settings">Alertas Programadas</string>
     <string name="language_selector_text">Change language to English</string>

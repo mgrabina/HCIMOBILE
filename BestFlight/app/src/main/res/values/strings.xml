@@ -10,7 +10,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="toast_error_gps">There is a problem with de gps. Loading deals from BS AS</string>
     <string name="alerts_text_settings">Current alerts</string>
     <string name="language_selector_text">Cambiar idioma a español</string>
     <string name="interval_message_settings">Select an interval of time between notifications</string>

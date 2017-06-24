@@ -114,8 +114,10 @@ public class DealsFragment extends Fragment {
                 try {
                     CityNearBy(response);
                 } catch (JSONException e) {
-                    Toast.makeText(getActivity(), "error2", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.toast_error_gps), Toast.LENGTH_LONG).show();
 //                    progressDialog.dismiss();
+                    getDeals("BUE");
+
 
                 }
             }
