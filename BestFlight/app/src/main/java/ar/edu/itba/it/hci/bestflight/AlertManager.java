@@ -10,6 +10,19 @@ import java.util.ArrayList;
 public class AlertManager {
     private static ArrayList<Alert> alerts = new ArrayList<Alert>();
 
+    //singleton
+    private static AlertManager instance = null;
+
+    public static AlertManager getInstance() {
+        if(instance == null) {
+            instance = new AlertManager();
+        }
+        return instance;
+    }
+
+
+
+
     public static void addAlert(Integer flight, String airline){
         alerts.add(new Alert(flight, airline));
     }

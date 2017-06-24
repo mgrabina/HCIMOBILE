@@ -44,7 +44,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     static private HashMap<City, Double> cities;
     private GoogleMap mMap;
     MapView mapView;
-    List<MarkerOptions> markers;
+    //List<MarkerOptions> markers;
 
 
 
@@ -65,7 +65,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         cities = new HashMap<City, Double>();
-        markers = new ArrayList<MarkerOptions>();
+        //markers = new ArrayList<MarkerOptions>();
 
         //setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -129,7 +129,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         Log.e("City", newCity.toString());
                         cities.put(newCity, price);
                         //
-                        //
+                        //add the marker
                         MarkerOptions m = new MarkerOptions();
                         m.position(new LatLng(newCity.getLatitude(), newCity.getLongitude()));
                         BitmapDescriptor icon = null;
