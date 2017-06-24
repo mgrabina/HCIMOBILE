@@ -33,7 +33,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FragmentManager fragmentManager;
+    private static FragmentManager fragmentManager;
     private static GPSTracker tracker;
     public static double getLatitude() {
         return tracker.getLatitude();
@@ -174,7 +174,18 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    private static void backStackAdd(Fragment fragment, String tag) {
 
+        if ( fragmentManager.findFragmentByTag(tag) != null) {
+
+            fragmentManager.popBackStack(tag, fragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, tag).addToBackStack(tag).commit();
+    }
+
+    public static void AddtoBackStack(Fragment fragment, String tag) {backStackAdd(fragment, tag); }
+    public static void popBackstack() { fragmentManager.popBackStack(); }
 
 }
 

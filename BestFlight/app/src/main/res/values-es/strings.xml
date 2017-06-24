@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Best Flight</string>
+    <string name="title_activity_maps">Best Flight</string>
+    <string name="title_activity_main">Actividad Principal</string>
+
+    <string name="navigation_drawer_open">Abrir Menu de Navegacion</string>
+    <string name="navigation_drawer_close">Cerrar Menu de Navegacion</string>
+
+    <string name="action_settings">Configuraciones</string>
+    <string name="alerts_text_settings">Alertas Programadas</string>
+    <string name="language_selector_text">Seleccione un lenguaje</string>
+    <string name="interval_message_settings">Seleccione un intervalo de tiempo entre notificaciones</string>
+    <string name="settings_title">Configuraciones</string>
+</resources>

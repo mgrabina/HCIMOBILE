@@ -1,6 +1,7 @@
 package ar.edu.itba.it.hci.bestflight;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -26,7 +27,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class SettingsFragment extends Fragment {
     private Integer[] intervalos;
-    private String displayLanguage;
+    private static String displayLanguage="EN";
     private Integer interval;
 
     public String getDisplayLanguage() {
@@ -51,7 +52,7 @@ public class SettingsFragment extends Fragment {
 
         final Spinner s = (Spinner) getActivity().findViewById(R.id.selectorDeTiempo);
         this.intervalos = new Integer[]{
-                1, 15, 30, 60, 120
+                1, 5, 10, 30, 60, 120, 500, 1000
         };
 
 
@@ -79,7 +80,7 @@ public class SettingsFragment extends Fragment {
         toggle.setTextOff("EN");
         toggle.setTextOn("ES");
 
-        if (displayLanguage.equals("EN"))
+        if (!displayLanguage.equals("EN"))
             toggle.setChecked(true);
         else
             toggle.setChecked(false);
@@ -88,10 +89,28 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 //Si cambie el idioma
-                if(isChecked)
+
+
+                if(isChecked) {
+                    Locale locale = new Locale("es");
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.setLocale(locale);
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+
                     displayLanguage = "ES";
-                else
+                }else {
+                    Locale locale = new Locale("en");
+                    Locale.setDefault(locale);
+                    Configuration config = new Configuration();
+                    config.setLocale(locale);
+                    getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+
                     displayLanguage = "EN";
+                }
+                MainActivity.popBackstack();
+                MainActivity.AddtoBackStack(new SettingsFragment(), getActivity().getResources().getString(R.string.action_settings));
+
             }
         });
 

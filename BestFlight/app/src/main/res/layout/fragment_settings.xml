@@ -17,7 +17,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Settings"
+            android:text="@string/settings_title"
             android:textAlignment="center"
             android:textSize="50sp"
             android:textStyle="bold" />
@@ -26,8 +26,7 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:text="Seleccione intervalo de tiempo entre notificaciones" />
+            android:text="@string/interval_message_settings"/>
 
         <Spinner
             android:id="@+id/selectorDeTiempo"
@@ -38,21 +37,20 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:text="Seleccione idioma" />
+            android:text="@string/language_selector_text" />
 
         <ToggleButton
             android:id="@+id/selectorIdioma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Idioma" />
+            />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:text="Alertas programadas:" />
+            android:text="@string/alerts_text_settings"
+             />
 
         <ListView
             android:id="@+id/alertsList"
