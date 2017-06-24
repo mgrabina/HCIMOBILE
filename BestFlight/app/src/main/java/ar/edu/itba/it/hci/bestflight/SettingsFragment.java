@@ -80,7 +80,7 @@ public class SettingsFragment extends Fragment {
         toggle.setTextOff("EN");
         toggle.setTextOn("ES");
 
-        if (!displayLanguage.equals("EN"))
+        if (displayLanguage.equals("EN"))
             toggle.setChecked(true);
         else
             toggle.setChecked(false);
