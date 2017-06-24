@@ -33,7 +33,7 @@ public class SettingsFragment extends Fragment {
     private static String displayLanguage = "EN";
     private static boolean EN = true;
     private static Integer interval=0;
-
+    private static ArrayList<Alert> alerts;
     public String getDisplayLanguage() {
         return displayLanguage;
     }
@@ -115,15 +115,17 @@ public class SettingsFragment extends Fragment {
         });
 
                 ListView alertsList = (ListView) getActivity().findViewById(R.id.alertsList);
-        ArrayList<Alert> a = AlertManager.getAlerts();
-        ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, a);
+        alerts = AlertManager.getAlerts();
+        ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, alerts);
         alertsList.setAdapter(adapt);
         alertsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Si clickeo un item.
                 //Borrar item
-                //AlertManager.removeAlert(flight, airline);
+                AlertManager.removeAlert(position);
+                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
+                
             }
         });
 
@@ -155,9 +157,7 @@ public class SettingsFragment extends Fragment {
             if(current != null)
                 MainActivity.rebootFragment(current, currentFragment);
         }else{
-            Log.e("Entro","aa");
-
-            //No hago nada
+            //No tengo ese idioma, ingles default
         }
 
 
