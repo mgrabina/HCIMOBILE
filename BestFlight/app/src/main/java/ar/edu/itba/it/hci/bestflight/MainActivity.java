@@ -1,7 +1,10 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,14 +18,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fragmentManager;
-    private ArrayList<String> airlinesTags;
+
+
+    //
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +52,33 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getFragmentManager();
 
+    //
+        Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
+        cancel();
+        start();
     }
 
+    //
+    //
+
+
+    public void start() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        long interval = 8000; //the update is every minute minium
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancel() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+    }
+
+    //
+    //
 
 
 

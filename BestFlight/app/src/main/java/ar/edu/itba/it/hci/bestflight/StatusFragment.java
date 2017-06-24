@@ -1,10 +1,16 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +47,8 @@ public class StatusFragment extends Fragment {
     ArrayAdapter<String> adapter;
     List<String> airlines;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +63,7 @@ public class StatusFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         getAirlines();
+
         airlinesMap = new HashMap<String, String>();
         airlines = new ArrayList<String>();
 
@@ -66,7 +75,9 @@ public class StatusFragment extends Fragment {
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                    checkStatus();
+
                 }
             });
 
@@ -74,9 +85,15 @@ public class StatusFragment extends Fragment {
 
 
 
+        //
+        //
 
 
     }
+
+
+
+
 
     private void checkStatus(){
         progressDialog = new ProgressDialog(getActivity());
