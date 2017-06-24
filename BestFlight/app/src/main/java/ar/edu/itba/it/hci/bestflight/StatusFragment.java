@@ -51,6 +51,7 @@ public class StatusFragment extends Fragment {
     private LinearLayout resultLayout;
     private FloatingActionButton fabAddNot;
     AlertManager alertManager;
+    Flight flightA;
 
 
 
@@ -137,6 +138,10 @@ public class StatusFragment extends Fragment {
                    if (response.has("status") ) {
 
                        String status = response.getJSONObject("status").getString("status");
+                       String airline = response.getJSONObject("status").getJSONObject("airline").getString("name");
+                       String id = response.getJSONObject("status").getString("id");
+                       String flightNumber = response.getJSONObject("status").getString("number");
+                       flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
                        showResult();
 
                    }
@@ -219,9 +224,10 @@ public class StatusFragment extends Fragment {
 
     private void addNotification(){
 
-        alertManager.addAlert(1, "air");
+        //alertManager.addAlert(1, "air");
+        alertManager.addAlert(flightA);
 
-        Toast.makeText(getActivity(), "add", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
 
 
     }

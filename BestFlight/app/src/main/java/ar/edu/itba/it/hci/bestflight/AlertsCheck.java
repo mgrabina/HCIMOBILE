@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 public class AlertsCheck extends BroadcastReceiver {
 
+    AlertManager alertManager = AlertManager.getInstance();
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
