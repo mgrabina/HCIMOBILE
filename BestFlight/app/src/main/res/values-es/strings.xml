@@ -2,13 +2,18 @@
     <string name="app_name">Best Flight</string>
     <string name="title_activity_maps">Best Flight</string>
     <string name="title_activity_main">Actividad Principal</string>
+    <string name="title_maps">Mapa</string>
 
     <string name="navigation_drawer_open">Abrir Menu de Navegacion</string>
     <string name="navigation_drawer_close">Cerrar Menu de Navegacion</string>
 
     <string name="action_settings">Configuraciones</string>
     <string name="alerts_text_settings">Alertas Programadas</string>
-    <string name="language_selector_text">Seleccione un lenguaje</string>
+    <string name="language_selector_text">Change language to English</string>
     <string name="interval_message_settings">Seleccione un intervalo de tiempo entre notificaciones</string>
     <string name="settings_title">Configuraciones</string>
+    <string name="title_deals">Ofertas</string>
+    <string name="status_title">Estado de vuelo</string>
+    <string name="language_change_notification">Lenguage cambiado a español</string>
+    <string name="interval_change_toast">Intervalo cambiado a </string>
 </resources>

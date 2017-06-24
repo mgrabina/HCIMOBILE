@@ -33,6 +33,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static boolean inicio = false;
 
     private static FragmentManager fragmentManager;
     private static GPSTracker tracker;
@@ -88,11 +89,19 @@ public class MainActivity extends AppCompatActivity
             Log.d("FLIGHTNUMBER", flightNSt.toString());
         }
 
-    //
+        //Default Fragment cuando inicia
+        if(!inicio) {
+            Fragment fragment = new DealsFragment();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
+            inicio = true;
+        }
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
         cancel();
         start();
+    }
+    public static  void rebootFragment(Fragment f, String name){
+        fragmentManager.beginTransaction().replace(R.id.content_frame, f, name).addToBackStack(name).commit();
     }
 
     //
