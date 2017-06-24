@@ -75,7 +75,7 @@
     <LinearLayout
         android:id="@+id/resultLayout"
         android:layout_width="match_parent"
-        android:layout_height="317dp"
+        android:layout_height="241dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -88,11 +88,11 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.71"
                 android:text="TextView" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton"
+                android:id="@+id/fabAddNot"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.17"

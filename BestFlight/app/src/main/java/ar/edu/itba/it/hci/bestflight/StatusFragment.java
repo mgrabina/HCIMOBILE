@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +49,8 @@ public class StatusFragment extends Fragment {
     ArrayAdapter<String> adapter;
     List<String> airlines;
     private LinearLayout resultLayout;
+    private FloatingActionButton fabAddNot;
+    AlertManager alertManager;
 
 
 
@@ -68,6 +71,7 @@ public class StatusFragment extends Fragment {
 
         airlinesMap = new HashMap<String, String>();
         airlines = new ArrayList<String>();
+        alertManager = AlertManager.getInstance();
 
         searchButton = (Button) getView().findViewById(R.id.searchButton);
         flightNumberET = (EditText) getView().findViewById(R.id.flightNumberET);
@@ -78,18 +82,29 @@ public class StatusFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                   checkStatus();
+                    checkStatus();
 
                 }
             });
+        }
 
 
             resultLayout = (LinearLayout) getView().findViewById(R.id.resultLayout);
             resultLayout.setVisibility(View.GONE);
-        }
+            fabAddNot = (FloatingActionButton) getView().findViewById(R.id.fabAddNot);
 
 
+            if (fabAddNot != null) {
+                fabAddNot.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
+                        addNotification();
+
+                    }
+                });
+
+            }
         //
         //
 
@@ -197,6 +212,16 @@ public class StatusFragment extends Fragment {
     private void showResult(){
 
         resultLayout.setVisibility(View.VISIBLE);
+
+
+    }
+
+
+    private void addNotification(){
+
+        alertManager.addAlert(1, "air");
+
+        Toast.makeText(getActivity(), "add", Toast.LENGTH_LONG).show();
 
 
     }
