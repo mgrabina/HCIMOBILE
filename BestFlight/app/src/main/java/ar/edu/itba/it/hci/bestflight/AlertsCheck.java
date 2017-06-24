@@ -54,6 +54,11 @@ public class AlertsCheck extends BroadcastReceiver {
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
 
+            String airline = AlertManager.getNotificationsMap().get(id).airline;
+            String flightNumber = AlertManager.getNotificationsMap().get(id).flightNumber.toString();
+            resultIntent.putExtra("airline", airline);
+            resultIntent.putExtra("flightNumber", flightNumber);
+
             // The stack builder object will contain an artificial back stack for the
             // started Activity.
             // This ensures that navigating backward from the Activity leads out of

@@ -40,7 +40,7 @@ public class AlertManager {
 
 
 
-    public static void removeAlert(String id){
+    public static void removeAlert(Integer id){
 
         Flight fl = notificationsMap.get(id);
 
@@ -49,7 +49,7 @@ public class AlertManager {
         String airline = fl.airline;
         //
 
-        notificationsMap.remove(fl);
+        notificationsMap.remove(id);
 
 
 

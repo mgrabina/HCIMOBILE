@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity
     //
     private PendingIntent pendingIntent;
 
+
+    String airlineSt = null;
+    Integer flightNSt = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +72,21 @@ public class MainActivity extends AppCompatActivity
 
 
         fragmentManager = getFragmentManager();
+    //
+
+        //Bundle bundl = new Bundle();
+        //bundl.putString("airlineId", "id");
+        //bundl.putInt("flightNumber", 0);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+
+           airlineSt = bundle.getString("airline");
+            flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
+
+            Log.d("AIRLINE", airlineSt);
+            Log.d("FLIGHTNUMBER", flightNSt.toString());
+        }
 
     //
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);

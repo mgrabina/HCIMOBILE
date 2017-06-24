@@ -55,6 +55,10 @@ public class StatusFragment extends Fragment {
 
 
 
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -224,10 +228,23 @@ public class StatusFragment extends Fragment {
 
     private void addNotification(){
 
-        //alertManager.addAlert(1, "air");
-        alertManager.addAlert(flightA);
 
-        Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
+        if( AlertManager.getNotificationsMap().containsKey(flightA.id)){
+
+            AlertManager.removeAlert(flightA.id);
+            fabAddNot.setImageResource(R.drawable.aiportgreen);
+            Toast.makeText(getActivity(), "removed", Toast.LENGTH_LONG).show();
+
+        }
+        else{
+            AlertManager.addAlert(flightA);
+            fabAddNot.setImageResource(R.drawable.aiportred);
+            Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
+
+        }
+
+
+
 
 
     }
