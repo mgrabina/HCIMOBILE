@@ -64,6 +64,9 @@ public class StatusFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
+
+
+
         return inflater.inflate(R.layout.fragment_status, container, false);
     }
 
@@ -200,6 +203,8 @@ public class StatusFragment extends Fragment {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     airlinesSpinner.setAdapter(adapter);
 
+                    setSearch();
+
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "error" , Toast.LENGTH_LONG).show();
@@ -243,6 +248,20 @@ public class StatusFragment extends Fragment {
 
         }
 
+
+
+
+
+    }
+
+    public void setSearch(){
+
+        if(this.getArguments() != null){
+
+            String airline = this.getArguments().getString("airline");
+
+            flightNumberET.setText(this.getArguments().getString("flightNumber"));
+        }
 
 
 

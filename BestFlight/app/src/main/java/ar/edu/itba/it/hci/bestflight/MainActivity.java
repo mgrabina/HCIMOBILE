@@ -78,15 +78,19 @@ public class MainActivity extends AppCompatActivity
         //bundl.putString("airlineId", "id");
         //bundl.putInt("flightNumber", 0);
 
-        Bundle bundle = getIntent().getExtras();
+       /* Bundle bundle = getIntent().getExtras();
+        getIntent().removeExtra("airline");
+        getIntent().removeExtra("flightNumber");
         if(bundle != null){
 
            airlineSt = bundle.getString("airline");
             flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
 
-            Log.d("AIRLINE", airlineSt);
-            Log.d("FLIGHTNUMBER", flightNSt.toString());
-        }
+            Fragment fragment = new StatusFragment();
+            fragment.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
+
+        }*/
 
     //
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
