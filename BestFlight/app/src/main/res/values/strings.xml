@@ -19,4 +19,5 @@
     <string name="status_title">Status</string>
     <string name="language_change_notification">Language changed to english</string>
     <string name="interval_change_toast">Interval changed to</string>
+    <string name="nolanguagehave">language not found</string>
 </resources>

@@ -25,11 +25,7 @@ public class Alert {
 
     @Override
     public String toString() {
-        return "Alert{" +
-                "flight=" + flight +
-                ", status='" + status + '\'' +
-                ", airline='" + airline + '\'' +
-                '}';
+        return airline + " " + flight + " | " + status;
     }
 
     @Override
@@ -49,5 +45,13 @@ public class Alert {
         int result = flight.hashCode();
         result = 31 * result + airline.hashCode();
         return result;
+    }
+
+    public Integer getFlight() {
+        return flight;
+    }
+
+    public String getAirline() {
+        return airline;
     }
 }

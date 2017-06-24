@@ -1,5 +1,6 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -32,7 +33,7 @@ public class SettingsFragment extends Fragment {
     private static String displayLanguage = "EN";
     private static boolean EN = true;
     private static Integer interval=0;
-
+    private static ArrayList<Alert> alerts;
     public String getDisplayLanguage() {
         return displayLanguage;
     }
@@ -51,7 +52,7 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
-        displayLanguage = Locale.getDefault().getDisplayLanguage();
+
         getActivity().setTitle(getResources().getString(R.string.settings_title));
 
         final Spinner s = (Spinner) getActivity().findViewById(R.id.selectorDeTiempo);
@@ -114,17 +115,51 @@ public class SettingsFragment extends Fragment {
         });
 
                 ListView alertsList = (ListView) getActivity().findViewById(R.id.alertsList);
-        ArrayList<Alert> a = AlertManager.getAlerts();
-        ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, a);
+        alerts = AlertManager.getAlerts();
+        ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, alerts);
         alertsList.setAdapter(adapt);
         alertsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Si clickeo un item.
                 //Borrar item
-                //AlertManager.removeAlert(flight, airline);
+                AlertManager.removeAlert(position);
+                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
+                
             }
         });
+
+    }
+
+    public static void checkLanguage(String displayLanguage, Activity a, Fragment current, String currentFragment, Context c) {
+        Log.e("Idioma de entrada", displayLanguage);
+        if (displayLanguage == "en" && !EN){
+            Locale locale = new Locale("en");
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            a.getBaseContext().getResources().updateConfiguration(config, a.getBaseContext().getResources().getDisplayMetrics());
+
+            displayLanguage = "EN";
+
+            EN = true;
+            if(current != null)
+                MainActivity.rebootFragment(current, currentFragment);
+        }else if(displayLanguage == "es" && EN){
+            Locale locale = new Locale("es");
+            Locale.setDefault(locale);
+            Configuration config = new Configuration();
+            config.setLocale(locale);
+            a.getBaseContext().getResources().updateConfiguration(config, a.getBaseContext().getResources().getDisplayMetrics());
+
+            displayLanguage = "ES";
+            EN = false;
+            if(current != null)
+                MainActivity.rebootFragment(current, currentFragment);
+        }else{
+            //No tengo ese idioma, ingles default
+        }
+
 
     }
 }
