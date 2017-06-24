@@ -66,7 +66,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState);
         cities = new HashMap<City, Double>();
         //markers = new ArrayList<MarkerOptions>();
-
+        getActivity().setTitle(getResources().getString(R.string.title_maps));
         //setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
        // SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

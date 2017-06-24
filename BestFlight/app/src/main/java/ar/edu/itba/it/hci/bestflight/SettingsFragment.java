@@ -12,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -27,15 +29,16 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class SettingsFragment extends Fragment {
     private Integer[] intervalos;
-    private static String displayLanguage="EN";
-    private Integer interval;
+    private static String displayLanguage = "EN";
+    private static boolean EN = true;
+    private static Integer interval=0;
 
     public String getDisplayLanguage() {
         return displayLanguage;
     }
 
     public Integer getInterval() {
-        return interval;
+        return intervalos[interval];
     }
 
     @Override
@@ -46,9 +49,10 @@ public class SettingsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
     public void onActivityCreated(Bundle savedInstanceState) {
+
         super.onActivityCreated(savedInstanceState);
         displayLanguage = Locale.getDefault().getDisplayLanguage();
-
+        getActivity().setTitle(getResources().getString(R.string.settings_title));
 
         final Spinner s = (Spinner) getActivity().findViewById(R.id.selectorDeTiempo);
         this.intervalos = new Integer[]{
@@ -59,62 +63,57 @@ public class SettingsFragment extends Fragment {
 
         final ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getActivity(), android.R.layout.simple_spinner_item, this.intervalos);
 
-        //Default
-        interval = 60;
-        s.setSelection(3);
-
         s.setAdapter(adapter);
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Si selecciono uno
-                interval = intervalos[s.getSelectedItemPosition()];
+                interval = intervalos[position];
+                Toast.makeText(getActivity(), getString(R.string.interval_change_toast)+(intervalos[position]).toString(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //Si no debo agarrar el que tenia
+                parent.setSelection(interval);
             }
         });
-        ToggleButton toggle = (ToggleButton) getActivity().findViewById(R.id.selectorIdioma);
-        toggle.setTextOff("EN");
-        toggle.setTextOn("ES");
-
-        if (displayLanguage.equals("EN"))
-            toggle.setChecked(true);
-        else
-            toggle.setChecked(false);
-
-            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        final Button languageS = (Button) getActivity().findViewById(R.id.selectorIdioma);
+        languageS.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //Si cambie el idioma
+            public void onClick(View v) {
 
-
-                if(isChecked) {
+                if(EN) {
                     Locale locale = new Locale("es");
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.setLocale(locale);
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+                    Toast.makeText(getActivity(), getString(R.string.language_change_notification), Toast.LENGTH_SHORT).show();
 
                     displayLanguage = "ES";
-                }else {
+                    EN = false;
+                }else{
                     Locale locale = new Locale("en");
                     Locale.setDefault(locale);
                     Configuration config = new Configuration();
                     config.setLocale(locale);
                     getActivity().getBaseContext().getResources().updateConfiguration(config, getActivity().getBaseContext().getResources().getDisplayMetrics());
+                    Toast.makeText(getActivity(), getString(R.string.language_change_notification), Toast.LENGTH_SHORT).show();
 
                     displayLanguage = "EN";
+
+                    EN = true;
                 }
-                MainActivity.popBackstack();
-                MainActivity.AddtoBackStack(new SettingsFragment(), getActivity().getResources().getString(R.string.action_settings));
+
+
+                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
 
             }
         });
 
-        ListView alertsList = (ListView) getActivity().findViewById(R.id.alertsList);
+                ListView alertsList = (ListView) getActivity().findViewById(R.id.alertsList);
         ArrayList<Alert> a = AlertManager.getAlerts();
         ArrayAdapter<Alert> adapt = new ArrayAdapter<Alert>(getContext(), android.R.layout.simple_list_item_1, a);
         alertsList.setAdapter(adapt);

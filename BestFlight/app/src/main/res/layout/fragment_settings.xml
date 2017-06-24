@@ -1,7 +1,7 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context="ar.edu.itba.it.hci.bestflight.SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -9,18 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_title"
-            android:textAlignment="center"
-            android:textSize="50sp"
-            android:textStyle="bold" />
+        android:background="@color/background"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_margin="0dp"
+        >
 
         <TextView
             android:id="@+id/textView3"
@@ -30,19 +23,23 @@
 
         <Spinner
             android:id="@+id/selectorDeTiempo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
-
-        <TextView
-            android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/language_selector_text" />
 
-        <ToggleButton
-            android:id="@+id/selectorIdioma"
-            android:layout_width="wrap_content"
+            ></Spinner>
+
+        <TextView
+            android:id="@+id/language_selector_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/language_selector_text"
+            />
+
+        <Button
+            android:id="@+id/selectorIdioma"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:drawableBottom="@drawable/ic_settings_black_24dp"
             />
 
         <TextView
@@ -59,4 +56,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

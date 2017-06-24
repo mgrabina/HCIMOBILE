@@ -44,6 +44,7 @@ public class DealsFragment extends Fragment {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle(getResources().getString(R.string.title_deals));
         ListView l = (ListView) getActivity().findViewById(R.id.list);
         adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
         l.setAdapter(adapter);

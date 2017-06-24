@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Best Flight</string>
-    <string name="title_activity_maps">Best Flight</string>
+    <string name="title_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -12,7 +12,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="alerts_text_settings">Current alerts</string>
-    <string name="language_selector_text">Select a language</string>
+    <string name="language_selector_text">Cambiar idioma a español</string>
     <string name="interval_message_settings">Select an interval of time between notifications</string>
     <string name="settings_title">Settings</string>
+    <string name="title_deals">Deals</string>
+    <string name="status_title">Status</string>
+    <string name="language_change_notification">Language changed to english</string>
+    <string name="interval_change_toast">Interval changed to</string>
 </resources>
