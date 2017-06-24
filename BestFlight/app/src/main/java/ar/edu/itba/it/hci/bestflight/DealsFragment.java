@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,28 +49,29 @@ public class DealsFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ListView l = (ListView) getActivity().findViewById(R.id.list);
-        final Spinner s= (Spinner) getActivity().findViewById(R.id.spinner);
-        adapter2=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dealscities);
+//        final Spinner s= (Spinner) getActivity().findViewById(R.id.spinner);
+//          adapter2=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dealscities);
         adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
-        s.setAdapter(adapter2);
+//        s.setAdapter(adapter2);
         l.setAdapter(adapter);
-        getCities();
-        getDeals("BUE");
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Si selecciono uno
-                String ids="";
-                ids=citiesid.get(position);
-                adapter.clear();
-                getDeals(ids);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        getNearestCity();
+//        getCities();
+//        getDeals("BUE");
+//        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                //Si selecciono uno
+//                String ids="";
+//                ids=citiesid.get(position);
+//                adapter.clear();
+//                getDeals(ids);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 
@@ -151,6 +153,93 @@ public class DealsFragment extends Fragment {
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
     }
+
+
+
+
+
+
+
+
+
+
+
+    private static final String OFFERS_ITEMS = "items";
+
+    private static final String CITIES_STRING_BASE = "http://hci.it.itba.edu.ar/v1/api/geo.groovy?method=getcitiesbyposition";
+
+    private static final int RADIUS = 100;
+
+    public void getNearestCity() {
+
+        String location_stringEnd = "&latitude=" + MainActivity.getLatitude() + "&longitude=" + MainActivity.getLongitud()
+                + "&radius=" + RADIUS;
+
+        String url = CITIES_STRING_BASE + location_stringEnd;
+
+        JsonObjectRequest
+                jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    CityNearBy(response);
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), "error2", Toast.LENGTH_LONG).show();
+//                    progressDialog.dismiss();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+
+            }
+        });
+        RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+
+
+    }
+
+    private void CityNearBy(JSONObject data) throws JSONException {
+
+        // First city in array is took as "From" for GoogleMap.
+
+        JSONArray cities = data.getJSONArray("cities");
+
+        JSONObject Firstelem = cities.getJSONObject(0);
+
+        String cityFrom = Firstelem.getString("id");
+
+        if (cityFrom == null) {
+            //mainText.setText(R.string.city_not_found);
+            return;
+        }
+
+        getDeals(cityFrom);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
