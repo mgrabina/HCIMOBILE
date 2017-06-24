@@ -122,7 +122,7 @@ public class DealsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
+               // progressDialog.dismiss();
 
             }
         });
