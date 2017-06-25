@@ -2,6 +2,7 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -49,6 +50,14 @@ public class DealsFragment extends Fragment {
         adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
         l.setAdapter(adapter);
         getNearestCity();
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Toast.makeText(getActivity(), cities.get(position).toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     private void getDeals(final String citi) {
@@ -70,7 +79,8 @@ public class DealsFragment extends Fragment {
 
                     // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
                     for (int i = 0; i < response.getJSONArray("deals").length(); i++) {
-                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name"));
+                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name")+" "+
+                                (response.getJSONArray("deals").getJSONObject(i)).getString("price"));
                     }
                     progressDialog.dismiss();
                 } catch (JSONException e) {
