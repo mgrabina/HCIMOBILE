@@ -27,4 +27,5 @@
     <string name="toggle_notifications">Activate notifications</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="loading">loading</string>
 </resources>

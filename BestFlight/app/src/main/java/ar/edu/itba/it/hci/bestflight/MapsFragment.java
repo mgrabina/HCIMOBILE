@@ -29,6 +29,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -106,7 +107,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     }
     private void getCities(String locationFrom) {
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
+        progressDialog.setMessage(getString(R.string.loading)); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
         progressDialog.setCancelable(false);
         progressDialog.show();
         String  url = "http://hci.it.itba.edu.ar/v1/api/booking.groovy?method=getflightdeals&from="+locationFrom;
@@ -214,11 +215,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(MainActivity.getLatitude(), MainActivity.getLongitud()));
         BitmapDescriptor icon = null;
-        Drawable d = getResources().getDrawable(R.drawable.aiportred);//cambiar a algun icono que sea desde
+        Drawable d = getResources().getDrawable(R.drawable.mylocation);//cambiar a algun icono que sea desde
         Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
         icon = BitmapDescriptorFactory.fromBitmap(bitmap);
         m.icon(icon);
-        mMap.addMarker(m);
+        CameraUpdateFactory.newLatLng(m.getPosition());
+        CameraUpdateFactory.zoomBy(5);
         JsonObjectRequest
                 jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
