@@ -1,16 +1,12 @@
 package ar.edu.itba.it.hci.bestflight;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +26,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static android.content.Context.LOCATION_SERVICE;
 import static android.widget.Toast.LENGTH_LONG;
 
 
@@ -60,25 +55,7 @@ public class SettingsFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
-
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        FragmentManager fragmentManager;
-        fragmentManager = getFragmentManager();
-        Fragment fragment = new SettingsFragment();
-        fragmentManager.popBackStack ("settingsFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
-
-    }
-
-
-
-
-
-
-
-
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
 
@@ -158,7 +135,12 @@ public class SettingsFragment extends Fragment {
                 }
 
 
-                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
+                //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");      //Si idioma no en todos lados
+                //Intento reiniciarla
+                Intent i = getActivity().getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( getActivity().getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
 
             }
         });

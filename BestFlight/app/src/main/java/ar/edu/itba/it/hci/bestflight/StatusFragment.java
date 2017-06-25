@@ -85,7 +85,7 @@ public class StatusFragment extends Fragment {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        getActivity().setTitle(getString(R.string.status_title));
         getAirlines();
 
         info = (TextView) getView().findViewById(R.id.infoFlightET);
