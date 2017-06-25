@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity
 
     public void setNotificationInterval(long number){
         this.notificationInterval = number;
+        start();
     }
 
     public void start() {
