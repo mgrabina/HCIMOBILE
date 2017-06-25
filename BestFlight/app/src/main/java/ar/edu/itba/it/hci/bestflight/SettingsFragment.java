@@ -167,7 +167,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public static void checkLanguage(String displayLanguage, Activity a, Fragment current, String currentFragment, Context c) {
-        Log.e("Idioma de entrada", displayLanguage);
+        //Log.e("Idioma de entrada", displayLanguage);
         if (displayLanguage == "en" && !EN){
             Locale locale = new Locale("en");
             Locale.setDefault(locale);

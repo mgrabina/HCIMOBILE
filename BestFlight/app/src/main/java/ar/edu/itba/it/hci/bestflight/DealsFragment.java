@@ -58,7 +58,7 @@ public class DealsFragment extends Fragment {
 
     private void getDeals(final String citi) {
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -88,7 +88,7 @@ public class DealsFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "error"+ citi, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.errorConection), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

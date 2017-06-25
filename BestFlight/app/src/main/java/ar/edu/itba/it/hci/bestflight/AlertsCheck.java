@@ -157,7 +157,7 @@ public class AlertsCheck extends BroadcastReceiver {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_airplane_grey600_48dp)
                         .setContentTitle(flight.airline + " - Flight: " + flight.flightNumber)
-                        .setContentText("The flight status has been updated")
+                        .setContentText(context.getString(R.string.statusUpdated))
                         .setAutoCancel(true);
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
@@ -189,45 +189,4 @@ public class AlertsCheck extends BroadcastReceiver {
 
     }
 
-
-    //start a notification for all the following flights (is not used in the app)
-    public void startNotification() {
-
-        for (Integer id : map.keySet()) {
-
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_airplane_grey600_48dp)
-                            .setContentTitle(map.get(id).airline + " - Flight: " + map.get(id).flightNumber)
-                            .setContentText("The flight status has been updated")
-                            .setAutoCancel(true);
-            // Creates an explicit intent for an Activity in your app
-            Intent resultIntent = new Intent(context, MainActivity.class);
-
-            String airline = map.get(id).airline;
-            String flightNumber = map.get(id).flightNumber.toString();
-            resultIntent.putExtra("airline", airline);
-            resultIntent.putExtra("flightNumber", flightNumber);
-
-            // The stack builder object will contain an artificial back stack for the
-            // started Activity.
-            // This ensures that navigating backward from the Activity leads out of
-            // your application to the Home screen.
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            // Adds the back stack for the Intent (but not the Intent itself)
-            stackBuilder.addParentStack(MainActivity.class);
-            // Adds the Intent that starts the Activity to the top of the stack
-            stackBuilder.addNextIntent(resultIntent);
-
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent( id, PendingIntent.FLAG_UPDATE_CURRENT  );
-
-            mBuilder.setContentIntent(resultPendingIntent);
-
-            NotificationManager mNotificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            // mId allows you to update the notification later on.
-            int mId = id;
-            mNotificationManager.notify(mId, mBuilder.build());
-        }
-    }
 }

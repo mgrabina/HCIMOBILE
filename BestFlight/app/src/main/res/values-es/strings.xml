@@ -26,4 +26,6 @@
     <string name="off">Apagado</string>
     <string name="loading">Cargando</string>
     <string name="title_dealsMenu">Ofertas</string>
+    <string name="errorConection">Error, por favor comprueba tu conexion a internet</string>
+    <string name="statusUpdated">"El estado del vuelo ha sido actualizado"</string>
 </resources>

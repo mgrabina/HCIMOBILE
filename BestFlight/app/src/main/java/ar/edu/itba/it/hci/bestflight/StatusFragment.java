@@ -125,7 +125,7 @@ public class StatusFragment extends Fragment {
 
     private void checkStatus(){
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("loading");
+        progressDialog.setMessage(getString(R.string.loading));
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -179,7 +179,7 @@ public class StatusFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.errorConection), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
@@ -240,7 +240,7 @@ public class StatusFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.errorConection), Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });
