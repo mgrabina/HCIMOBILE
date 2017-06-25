@@ -70,6 +70,9 @@ public class SettingsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Si selecciono uno
                 interval = intervalos[position];
+
+
+
                 Toast.makeText(getActivity(), getString(R.string.interval_change_toast)+(intervalos[position]).toString(), Toast.LENGTH_SHORT).show();
 
             }

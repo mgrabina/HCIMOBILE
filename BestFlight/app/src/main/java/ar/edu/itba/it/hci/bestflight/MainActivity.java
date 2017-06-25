@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //private static boolean inicio = false;
 
+    private long notificationInterval = 60000;
     private static FragmentManager fragmentManager;
     private static GPSTracker tracker;
     public static double getLatitude() {
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity
 
     //
     //
+
+
 
 
     public void start() {
