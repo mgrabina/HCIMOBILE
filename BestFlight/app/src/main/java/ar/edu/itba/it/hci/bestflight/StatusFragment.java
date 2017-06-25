@@ -220,6 +220,7 @@ public class StatusFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+        progressDialog.dismiss();
     }
 
 
@@ -260,7 +261,14 @@ public class StatusFragment extends Fragment {
 
             String airline = this.getArguments().getString("airline");
 
+            int position = airlines.indexOf(airline);
+            airlinesSpinner.setSelection(position);
+
             flightNumberET.setText(this.getArguments().getString("flightNumber"));
+
+            searchButton.performClick();
+
+
         }
 
 

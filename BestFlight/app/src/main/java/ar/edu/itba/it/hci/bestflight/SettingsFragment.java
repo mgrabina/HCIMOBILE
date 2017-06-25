@@ -125,7 +125,7 @@ public class SettingsFragment extends Fragment {
                 //Borrar item
                 //AlertManager.removeAlert(position);
                 //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
-                
+
                 String airline = alerts.get(position).getAirline();
                 String flightNumber = alerts.get(position).getFlight().toString();
 
