@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="horizontal"
+    tools:context="ar.edu.itba.it.hci.bestflight.SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="0dp"
+        >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/interval_message_settings"/>
+
+        <Spinner
+            android:id="@+id/selectorDeTiempo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            ></Spinner>
+
+        <TextView
+            android:id="@+id/language_selector_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language_selector_text"
+            />
+
+        <Button
+            android:id="@+id/selectorIdioma"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:drawableBottom="@drawable/ic_settings_black_24dp"
+            />
+
+
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="0dp"
+        >
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alerts_text_settings"/>
+    <ListView
+        android:id="@+id/alertsList"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    </LinearLayout>
+    </LinearLayout>
