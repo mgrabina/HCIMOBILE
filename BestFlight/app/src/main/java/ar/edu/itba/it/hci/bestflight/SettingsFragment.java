@@ -2,6 +2,7 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -134,7 +135,12 @@ public class SettingsFragment extends Fragment {
                 }
 
 
-                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
+                //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");      //Si idioma no en todos lados
+                //Intento reiniciarla
+                Intent i = getActivity().getBaseContext().getPackageManager()
+                        .getLaunchIntentForPackage( getActivity().getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
 
             }
         });
