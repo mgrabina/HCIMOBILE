@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity
         start();
     }
     public static  void rebootFragment(Fragment f, String name){
+        popBackstack();
         fragmentManager.beginTransaction().replace(R.id.content_frame, f, name).addToBackStack(name).commit();
     }
 

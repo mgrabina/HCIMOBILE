@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@android:color/white"
+    android:background="@color/background"
     tools:context="ar.edu.itba.it.hci.bestflight.StatusFragment"
     android:weightSum="1">
 
