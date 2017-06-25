@@ -163,12 +163,22 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+
+        Integer count = getFragmentManager().getBackStackEntryCount();
+        Log.d("BACKPRESSED", count.toString());
+        if (count == 1) {
+            finish();
         } else {
-            super.onBackPressed();
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
         }
+
+
+
     }
 
 
@@ -290,6 +300,9 @@ public class MainActivity extends AppCompatActivity
         }
        // updated = true;
     }
+
+
+
 
 }
 
