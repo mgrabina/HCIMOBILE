@@ -157,7 +157,7 @@ public class StatusFragment extends Fragment {
 
 
 
-                       //flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
+                       flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
                        showResult();
 
                    }

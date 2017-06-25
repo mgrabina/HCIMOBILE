@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity
         */
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
-        cancel();
         start();
     }
     public static  void rebootFragment(Fragment f, String name){

@@ -39,13 +39,13 @@ public class SettingsFragment extends Fragment {
         return displayLanguage;
     }
 
-    public Integer getInterval() {
-        return intervalos[interval];
-    }
+   // public Integer getInterval() {
+   //     return intervalos[interval];
+    //}
 
-    public static boolean getNotifications() {
-        return getNotificaciones;
-    }
+   // public static boolean getNotifications() {
+   //     return getNotificaciones;
+   // }
 
     @Override
 
@@ -76,7 +76,7 @@ public class SettingsFragment extends Fragment {
                 //Si selecciono uno
                 interval = intervalos[position];
 
-
+                ((MainActivity)getActivity()).setNotificationInterval(interval * 60000);
 
                 Toast.makeText(getActivity(), getString(R.string.interval_change_toast)+(intervalos[position]).toString(), Toast.LENGTH_SHORT).show();
 
@@ -89,10 +89,20 @@ public class SettingsFragment extends Fragment {
             }
         });
         ToggleButton  tb = (ToggleButton) getActivity().findViewById(R.id.toggleNotis);
+        tb.setChecked(true);
         tb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                getNotificaciones = isChecked;
+
+                if(isChecked){
+                    ((MainActivity)getActivity()).start();
+                }
+                else{
+                    ((MainActivity)getActivity()).cancel();
+                }
+
+
+
             }
         });
         final Button languageS = (Button) getActivity().findViewById(R.id.selectorIdioma);
