@@ -24,4 +24,8 @@
     <string name="search">Search</string>
     <string name="alarmset">Alarm Set</string>
     <string name="alarmcanceled">Alarm Canceled</string>
+    <string name="toggle_notifications">Activate notifications</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="loading">loading</string>
 </resources>
