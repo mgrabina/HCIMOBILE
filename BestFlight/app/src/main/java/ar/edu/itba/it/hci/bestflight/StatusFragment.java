@@ -254,7 +254,7 @@ public class StatusFragment extends Fragment {
 
         resultLayout.setVisibility(View.VISIBLE);
         setFabImage();
-        String flightInfo = "AIRLINE: " +flightA.airline + "\nFLIGHT NUMBER: "+ flightA.flightNumber + "\nSTATUS: "+ flightA.status +"\n\ndeparture: " +flightA.departureTime + "\nTerminal: " +flightA.departureTerminal + ", Gate: " +flightA.departureGate + "\narrival: " +flightA.arrivalTime + "\nTerminal: " +flightA.arrivalTerminal + ", Gate: " +flightA.arrivalGate + "\nBagagge Gate: " + flightA.baggageGate;
+        String flightInfo = getString(R.string.airline) +flightA.airline + "\n" + getString(R.string.flightNumber)+ flightA.flightNumber + "\n" + getString(R.string.status)+ flightA.status +"\n\n" + getString(R.string.departure)+flightA.departureTime + "\n" + getString(R.string.terminal) +flightA.departureTerminal + ", "+ getString(R.string.gate) +flightA.departureGate + "\n" + getString(R.string.arrival) +flightA.arrivalTime + "\n" + getString(R.string.terminal) +flightA.arrivalTerminal + ", " + getString(R.string.gate) +flightA.arrivalGate + "\n" + getString(R.string.baggageGate) + flightA.baggageGate;
         info.setText(flightInfo);
 
         View view = getActivity().getCurrentFocus();

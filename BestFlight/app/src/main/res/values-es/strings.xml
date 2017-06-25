@@ -10,12 +10,12 @@
     <string name="action_settings">Configuraciones</string>
     <string name="alerts_text_settings">Alertas Programadas</string>
     <string name="language_selector_text">Change language to English</string>
-    <string name="interval_message_settings">Seleccione un intervalo de tiempo entre notificaciones</string>
+    <string name="interval_message_settings">Seleccione un intervalo de minutos entre notificaciones</string>
     <string name="settings_title">Configuraciones</string>
-    <string name="title_deals">Ofertas desde </string>
+    <string name="title_deals">"Ofertas desde "</string>
     <string name="status_title">Estado de vuelo</string>
     <string name="language_change_notification">Lenguage cambiado a español</string>
-    <string name="interval_change_toast">Intervalo cambiado a </string>
+    <string name="interval_change_toast">"Intervalo cambiado a "</string>
     <string name="flight_number">Numero de vuelo</string>
     <string name="search">Buscar</string>
     <string name="alarmset">Alarma configurada</string>
@@ -28,4 +28,13 @@
     <string name="title_dealsMenu">Ofertas</string>
     <string name="errorConection">Error, por favor comprueba tu conexion a internet</string>
     <string name="statusUpdated">"El estado del vuelo ha sido actualizado"</string>
+
+    <string name="airline">"AEROLINEA: "</string>
+    <string name="flightNumber">"NUMERO DE VUELO: "</string>
+    <string name="status">"ESTADO: "</string>
+    <string name="departure">"Partida: "</string>
+    <string name="terminal">"Terminal: "</string>
+    <string name="gate">"Puerta: "</string>
+    <string name="arrival">"arrivo: "</string>
+    <string name="baggageGate">"Puerta de equipaje: "</string>
 </resources>

@@ -14,9 +14,9 @@
     <string name="toast_error_gps">There is a problem with the gps. Loading deals from BS AS</string>
     <string name="alerts_text_settings">Current alerts</string>
     <string name="language_selector_text">Cambiar idioma a español</string>
-    <string name="interval_message_settings">Select an interval of time between notifications</string>
+    <string name="interval_message_settings">Select an interval of minutes between notifications</string>
     <string name="settings_title">Settings</string>
-    <string name="title_deals">Deals from </string>
+    <string name="title_deals">"Deals from "</string>
     <string name="status_title">Status</string>
     <string name="language_change_notification">Language changed to english</string>
     <string name="interval_change_toast">Interval changed to</string>
@@ -30,5 +30,16 @@
     <string name="off">Off</string>
     <string name="loading">loading</string>
     <string name="errorConection">Error, please check your internet connection</string>
-    <string name="statusUpdated">"The flight status has been updated"</string>
+    <string name="statusUpdated">The flight status has been updated</string>
+
+    <string name="airline">"AIRLINE: "</string>
+    <string name="flightNumber">"FLIGHT NUMBER: "</string>
+    <string name="status">"STATUS: "</string>
+    <string name="departure">"departure: "</string>
+    <string name="terminal">"Terminal: "</string>
+    <string name="gate">"Gate: "</string>
+    <string name="arrival">"arrival: "</string>
+    <string name="baggageGate">"Bagagge Gate: "</string>
+
+
 </resources>
