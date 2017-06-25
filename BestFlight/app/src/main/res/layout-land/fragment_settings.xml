@@ -42,6 +42,19 @@
             android:layout_width="match_parent"
             android:drawableBottom="@drawable/ic_settings_black_24dp"
             />
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_notifications"
+            />
+        <ToggleButton
+            android:id="@+id/toggleNotis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textOn="@string/on"
+            android:textOff="@string/off"/>
 
 
              />

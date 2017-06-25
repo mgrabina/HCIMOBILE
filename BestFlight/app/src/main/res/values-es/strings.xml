@@ -21,4 +21,7 @@
     <string name="alarmset">Alarma configurada</string>
     <string name="alarmcanceled">Alarm cancelada</string>
     <string name="nolanguagehave">Lenguaje no disponible</string>
+    <string name="toggle_notifications">Activar notificaciones</string>
+    <string name="on">Encendido</string>
+    <string name="off">Apagado</string>
 </resources>

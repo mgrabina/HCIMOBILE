@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         }
        else{
+
             Fragment fragment = new DealsFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
         }
