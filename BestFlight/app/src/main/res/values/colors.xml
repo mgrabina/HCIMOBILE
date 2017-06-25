@@ -8,5 +8,7 @@
     <color name="greenPlane">#BCF5A9</color>
     <color name="redPlane">#F78181</color>
     <color name="yellowPlane">#F5F6CE</color>
-
+    <color name="degradecenter">#58D3F7</color>
+    <color name="degradeend">#084B8A</color>
+    <color name="degradestart">#A9E2F3</color>
 </resources>

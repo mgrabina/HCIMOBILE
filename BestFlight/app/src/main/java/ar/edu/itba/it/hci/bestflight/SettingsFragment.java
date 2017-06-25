@@ -54,7 +54,7 @@ public class SettingsFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public void onActivityCreated(final Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
 

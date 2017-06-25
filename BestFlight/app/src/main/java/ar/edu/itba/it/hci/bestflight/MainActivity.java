@@ -62,10 +62,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("Prueba","0");
 
         updateNotificationsMap();
 
-
+        Log.e("Prueba","1");
         SettingsFragment.checkLanguage(Locale.getDefault().getLanguage(), this, null, null, this);      //Setea el lenguaje del dispositivo
         checkLocationPermission();
         setContentView(R.layout.activity_main);
@@ -73,17 +74,17 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         LocationManager location = (LocationManager) getSystemService(LOCATION_SERVICE);
         tracker=new GPSTracker(location);
-
+        Log.e("Prueba","2");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        Log.e("Prueba","3");
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        Log.e("Prueba","4");
         fragmentManager = getFragmentManager();
         AlertManager.getInstance();
 
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity
        // bundl.putString("airlineId", "id");
         //bundl.putInt("flightNumber", 0);
 
-
+        Log.e("Prueba","5");
         if(getIntent().hasExtra("airline") && getIntent().hasExtra("flightNumber")){
 
             Bundle bundle = getIntent().getExtras();
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
         }
 
-
+        Log.e("Prueba","6");
        /* if(!inicio) {
             Fragment fragment = new DealsFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
         start();
+        Log.e("Prueba","7");
     }
     public static  void rebootFragment(Fragment f, String name){
         popBackstack();
@@ -253,7 +255,7 @@ public class MainActivity extends AppCompatActivity
     public void updateNotificationsMap(){
 
        // updated=false;
-        Log.d("UPDATENOTIFICATIONMAP","UPDATE");
+  //      Log.e("UPDATENOTIFICATIONMAP","UPDATE");      TIRA ERROR
 
         String serializedMap = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("NotificationsMap", "empty");
 
@@ -264,14 +266,14 @@ public class MainActivity extends AppCompatActivity
             HashMap<Integer, Flight> map = wrapper.myMap;
             AlertManager.setNotificationsMap(map);
 
-            //
+/*
             for(Integer id : map.keySet()){
-                Log.d("AEROLINEA: " + AlertManager.getNotificationsMap().get(id).airline, AlertManager.getNotificationsMap().get(id).baggageGate);
+                 //Log.d("AEROLINEA: " + AlertManager.getNotificationsMap().get(id).airline, AlertManager.getNotificationsMap().get(id).baggageGate);
 
             }
+*/
 
 
-            //
 
 
             ArrayList<Alert> a = new ArrayList<Alert>();
