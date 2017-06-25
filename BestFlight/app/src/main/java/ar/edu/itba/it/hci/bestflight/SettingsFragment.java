@@ -1,6 +1,7 @@
 package ar.edu.itba.it.hci.bestflight;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -39,7 +40,14 @@ public class SettingsFragment extends Fragment {
     public String getDisplayLanguage() {
         return displayLanguage;
     }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        FragmentManager fragmentManager;
+        fragmentManager = getFragmentManager();
+        Fragment fragment = new SettingsFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
+    }
    // public Integer getInterval() {
    //     return intervalos[interval];
     //}
