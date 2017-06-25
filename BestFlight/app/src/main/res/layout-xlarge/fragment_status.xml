@@ -1,0 +1,69 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/background"
+    tools:context="ar.edu.itba.it.hci.bestflight.StatusFragment"
+    android:weightSum="1">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+        <Spinner
+            android:id="@+id/airlinesSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"/>
+        <EditText
+            android:id="@+id/flightNumberET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:text="@string/flight_number"
+            android:textSize="25dp"/>
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+
+            android:text="@string/search" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/resultLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fabAddNot"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+
+                app:fabSize="mini"
+                app:srcCompat="@android:drawable/ic_menu_add" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -20,4 +20,6 @@
     <string name="language_change_notification">Language changed to english</string>
     <string name="interval_change_toast">Interval changed to</string>
     <string name="nolanguagehave">language not found</string>
+    <string name="flight_number">Flight Number</string>
+    <string name="search">Search</string>
 </resources>

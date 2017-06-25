@@ -16,4 +16,6 @@
     <string name="status_title">Estado de vuelo</string>
     <string name="language_change_notification">Lenguage cambiado a español</string>
     <string name="interval_change_toast">Intervalo cambiado a </string>
+    <string name="flight_number">Numero de vuelo</string>
+    <string name="search">Buscar</string>
 </resources>
