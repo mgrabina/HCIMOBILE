@@ -1,7 +1,9 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -63,6 +65,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
         return v;
     }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        FragmentManager fragmentManager;
+        fragmentManager = getFragmentManager();
+        Fragment fragment = new MapsFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "mapsFragment").addToBackStack("mapsFragment").commit();
+
+    }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

@@ -1,8 +1,10 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -164,6 +166,14 @@ public class DealsFragment extends Fragment {
 
     }
 
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        FragmentManager fragmentManager;
+        fragmentManager = getFragmentManager();
+        Fragment fragment = new DealsFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
+
+    }
 
 
 

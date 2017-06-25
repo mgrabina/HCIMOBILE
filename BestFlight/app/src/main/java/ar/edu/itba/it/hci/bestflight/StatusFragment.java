@@ -1,11 +1,13 @@
 package ar.edu.itba.it.hci.bestflight;
 
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
@@ -67,12 +69,15 @@ public class StatusFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
-
-
         return inflater.inflate(R.layout.fragment_status, container, false);
+    }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        FragmentManager fragmentManager;
+        fragmentManager = getFragmentManager();
+        Fragment fragment = new StatusFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
+
     }
 
 
