@@ -12,7 +12,7 @@
     <string name="language_selector_text">Change language to English</string>
     <string name="interval_message_settings">Seleccione un intervalo de tiempo entre notificaciones</string>
     <string name="settings_title">Configuraciones</string>
-    <string name="title_deals">Ofertas</string>
+    <string name="title_deals">Ofertas desde </string>
     <string name="status_title">Estado de vuelo</string>
     <string name="language_change_notification">Lenguage cambiado a español</string>
     <string name="interval_change_toast">Intervalo cambiado a </string>
