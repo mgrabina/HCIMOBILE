@@ -25,4 +25,5 @@
     <string name="on">Encendido</string>
     <string name="off">Apagado</string>
     <string name="loading">loading</string>
+    <string name="title_dealsMenu">Ofertas</string>
 </resources>
