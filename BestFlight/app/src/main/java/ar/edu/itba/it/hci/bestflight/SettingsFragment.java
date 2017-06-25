@@ -34,12 +34,17 @@ public class SettingsFragment extends Fragment {
     private static boolean EN = true;
     private static Integer interval=0;
     private static ArrayList<Alert> alerts;
+    private static boolean getNotificaciones = true;
     public String getDisplayLanguage() {
         return displayLanguage;
     }
 
     public Integer getInterval() {
         return intervalos[interval];
+    }
+
+    public static boolean getNotifications() {
+        return getNotificaciones;
     }
 
     @Override
@@ -81,6 +86,13 @@ public class SettingsFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
                 //Si no debo agarrar el que tenia
                 parent.setSelection(interval);
+            }
+        });
+        ToggleButton  tb = (ToggleButton) getActivity().findViewById(R.id.toggleNotis);
+        tb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getNotificaciones = isChecked;
             }
         });
         final Button languageS = (Button) getActivity().findViewById(R.id.selectorIdioma);
