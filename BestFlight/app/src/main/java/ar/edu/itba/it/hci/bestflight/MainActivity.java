@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     //
     private PendingIntent pendingIntent;
 
+   // public boolean updated = false;
+
 
    // String airlineSt = null;
    // Integer flightNSt = null;
@@ -248,6 +250,9 @@ public class MainActivity extends AppCompatActivity
 
 
     public void updateNotificationsMap(){
+
+       // updated=false;
+
         String serializedMap = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("NotificationsMap", "empty");
 
         if(!serializedMap.equals("empty")) {
@@ -271,6 +276,7 @@ public class MainActivity extends AppCompatActivity
 
 
         }
+       // updated = true;
     }
 
 }

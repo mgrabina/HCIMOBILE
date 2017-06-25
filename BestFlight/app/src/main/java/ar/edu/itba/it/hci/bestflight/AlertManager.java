@@ -93,12 +93,19 @@ public class AlertManager extends Application {
 
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
 
+        Alert alertAux = null;
 
 
+        for(Alert a : alerts){
+            Alert aux = new Alert(flightNumber, airline);
+            if(a.equals(aux))
+                alertAux = aux;
+        }
 
-        for(Alert a : alerts)
-            if(a.equals(new Alert(flightNumber, airline)))
-                alerts.remove(a);
+        if(alertAux != null){
+            alerts.remove(alertAux);
+        }
+
     }
 
 

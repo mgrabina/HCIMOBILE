@@ -237,7 +237,7 @@ public class StatusFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 
 
@@ -260,7 +260,20 @@ public class StatusFragment extends Fragment {
 
     private void addNotification() {
 
+    /*
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
+        progressDialog.setCancelable(false);
+        progressDialog.show();
 
+
+
+        while( !((MainActivity)getActivity()).updated ){
+            Log.d("acatpy","acatoy");
+        }
+
+        progressDialog.dismiss();
+    */
         if (AlertManager.getNotificationsMap().containsKey(flightA.id)) {
 
             AlertManager.removeAlert(flightA.id, getContext());
@@ -314,9 +327,33 @@ public class StatusFragment extends Fragment {
 
         }
 
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if(progressDialog != null)
+            progressDialog.dismiss();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(progressDialog != null)
+            progressDialog.dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
 
 
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
 }

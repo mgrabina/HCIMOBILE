@@ -96,7 +96,7 @@ public class DealsFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
-        progressDialog.dismiss();
+
     }
 
 
@@ -168,15 +168,32 @@ public class DealsFragment extends Fragment {
 
 
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if(progressDialog != null)
+            progressDialog.dismiss();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(progressDialog != null)
+            progressDialog.dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
 
 
-
-
-
-
-
-
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 
 
 
