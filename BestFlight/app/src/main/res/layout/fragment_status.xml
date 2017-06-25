@@ -89,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.71"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textAlignment="center" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fabAddNot"
