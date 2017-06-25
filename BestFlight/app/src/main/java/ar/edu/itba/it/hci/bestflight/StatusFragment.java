@@ -58,7 +58,9 @@ public class StatusFragment extends Fragment {
 
     TextView info;
 
-
+    //
+    //
+    Fragment thisFragment;
 
 
 
@@ -120,7 +122,7 @@ public class StatusFragment extends Fragment {
             }
         //
         //
-
+        thisFragment = this;
 
     }
 
@@ -220,7 +222,19 @@ public class StatusFragment extends Fragment {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     airlinesSpinner.setAdapter(adapter);
 
-                    setSearch();
+                    //setSearch();
+                    if(thisFragment.getArguments() != null){
+
+                        String airline = thisFragment.getArguments().getString("airline");
+
+                        int position = airlines.indexOf(airline);
+                        airlinesSpinner.setSelection(position);
+
+                        flightNumberET.setText(thisFragment.getArguments().getString("flightNumber"));
+
+                        searchButton.performClick();
+                    }
+                    ////
 
                     progressDialog.dismiss();
                 } catch (JSONException e) {
@@ -246,7 +260,7 @@ public class StatusFragment extends Fragment {
 
         resultLayout.setVisibility(View.VISIBLE);
         setFabImage();
-        String flightInfo = "AIRLINE: " +flightA.airline + "\nFLIGHT NUMBER: "+ flightA.flightNumber +"\n\ndeparture: " +flightA.departureTime + "\nTerminal: " +flightA.departureTerminal + ", Gate: " +flightA.departureGate + "\narrival: " +flightA.arrivalTime + "\nTerminal: " +flightA.arrivalTerminal + ", Gate: " +flightA.arrivalGate + "\nBagagge Gate: " + flightA.baggageGate;
+        String flightInfo = "AIRLINE: " +flightA.airline + "\nFLIGHT NUMBER: "+ flightA.flightNumber + "\nSTATUS: "+ flightA.status +"\n\ndeparture: " +flightA.departureTime + "\nTerminal: " +flightA.departureTerminal + ", Gate: " +flightA.departureGate + "\narrival: " +flightA.arrivalTime + "\nTerminal: " +flightA.arrivalTerminal + ", Gate: " +flightA.arrivalGate + "\nBagagge Gate: " + flightA.baggageGate;
         info.setText(flightInfo);
 
         View view = getActivity().getCurrentFocus();
@@ -311,7 +325,7 @@ public class StatusFragment extends Fragment {
 
 
 
-    public void setSearch(){
+    /*public void setSearch(){
 
         if(this.getArguments() != null){
 
@@ -327,7 +341,7 @@ public class StatusFragment extends Fragment {
 
         }
 
-    }
+    }*/
 
     @Override
     public void onStop() {

@@ -6,7 +6,7 @@ package ar.edu.itba.it.hci.bestflight;
 
 public class Alert {
     private Integer flight;
-    private String status;
+    //private String status;
     private String airline;
 
 
@@ -14,20 +14,20 @@ public class Alert {
         this.flight = flight;
         this.airline = airline;
 
-        status = "default";
+       // status = "default";
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+   // public void setStatus(String status) {
+  //      this.status = status;
+   // }
 
-    public String getStatus() {
-        return status;
-    }
+   // public String getStatus() {
+   //     return status;
+    //}
 
     @Override
     public String toString() {
-        return airline + " " + flight + " | " + status;
+        return airline + " " + flight ;//+ " | " + status;
     }
 
     @Override
