@@ -148,7 +148,16 @@ public class StatusFragment extends Fragment {
                        String airline = response.getJSONObject("status").getJSONObject("airline").getString("name");
                        String id = response.getJSONObject("status").getString("id");
                        String flightNumber = response.getJSONObject("status").getString("number");
-                       flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
+
+                       String departureTime;
+                       String arrivalTime;
+                       String departureGate;
+                       String arrivalGate;
+                       String baggageGate;
+
+
+
+                       //flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
                        showResult();
 
                    }

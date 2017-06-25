@@ -133,11 +133,13 @@ public class MainActivity extends AppCompatActivity
     //
 
 
-
+    public void setNotificationInterval(long number){
+        this.notificationInterval = number;
+    }
 
     public void start() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        long interval = 8000; //the update is every minute minium
+        long interval = notificationInterval; //the update is every minute minium
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
         Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();

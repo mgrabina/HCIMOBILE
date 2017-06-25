@@ -17,7 +17,8 @@ public class Flight {
 
 
 
-    public Flight( Integer flightNumber,String airline,String status, Integer id ){
+    public Flight( Integer flightNumber,String airline,String status, Integer id, String departureTime, String arrivalTime, String departureGate,
+                   String arrivalGate, String baggageGate){
 
         this.flightNumber = flightNumber;
         this.status = status;
