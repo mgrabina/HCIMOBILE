@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -92,7 +94,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        getCities();
+        getNearestCity();
+
 
 
 
@@ -101,12 +104,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 
     }
-    private void getCities() {
+    private void getCities(String locationFrom) {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
         progressDialog.setCancelable(false);
         progressDialog.show();
-        String locationFrom = "BUE";
         String  url = "http://hci.it.itba.edu.ar/v1/api/booking.groovy?method=getflightdeals&from="+locationFrom;
 
 
@@ -133,25 +135,26 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                         MarkerOptions m = new MarkerOptions();
                         m.position(new LatLng(newCity.getLatitude(), newCity.getLongitude()));
                         BitmapDescriptor icon = null;
-                        if(cities.get(newCity) < 500.0){
+
+                        if (cities.get(newCity) < 500.0) {
                             Drawable d = getResources().getDrawable(R.drawable.aiportgreen);
-                            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+                            Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
                             icon = BitmapDescriptorFactory.fromBitmap(bitmap);
-                        }else if (cities.get(newCity) > 500.00 && cities.get(newCity) < 1000.00){
+                        } else if (cities.get(newCity) > 500.00 && cities.get(newCity) < 1000.00) {
                             Drawable d = getResources().getDrawable(R.drawable.aiportyellow);
-                            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+                            Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
                             icon = BitmapDescriptorFactory.fromBitmap(bitmap);
-                        }else{
+                        } else {
                             Drawable d = getResources().getDrawable(R.drawable.aiportred);
-                            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+                            Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
                             icon = BitmapDescriptorFactory.fromBitmap(bitmap);
                         }
                         m.icon(icon);
                         m.title(newCity.getName() + " " + cities.get(newCity).toString());
                         mMap.addMarker(m);
                         //
-                        //
-                    }
+                    }//
+
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     Log.e("Error", e.toString());
@@ -197,4 +200,77 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
+    private static final String CITIES_STRING_BASE = "http://hci.it.itba.edu.ar/v1/api/geo.groovy?method=getcitiesbyposition";
+
+    private static final int RADIUS = 100;
+
+    public void getNearestCity() {
+
+        String location_stringEnd = "&latitude=" + MainActivity.getLatitude() + "&longitude=" + MainActivity.getLongitud()
+                + "&radius=" + RADIUS;
+
+        String url = CITIES_STRING_BASE + location_stringEnd;
+        MarkerOptions m = new MarkerOptions();
+        m.position(new LatLng(MainActivity.getLatitude(), MainActivity.getLongitud()));
+        BitmapDescriptor icon = null;
+        Drawable d = getResources().getDrawable(R.drawable.aiportred);//cambiar a algun icono que sea desde
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+        m.icon(icon);
+        mMap.addMarker(m);
+        JsonObjectRequest
+                jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                   CityNearBy(response);
+                } catch (JSONException e) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_error_gps), Toast.LENGTH_LONG).show();
+                    getCities("BUE");
+//                    progressDialog.dismiss();
+
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
+                // progressDialog.dismiss();
+
+            }
+        });
+        RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
+
+
+    }
+
+    private void CityNearBy(JSONObject data) throws JSONException {
+
+        // First city in array is took as "From" for GoogleMap.
+
+        JSONArray cities = data.getJSONArray("cities");
+
+        JSONObject Firstelem = cities.getJSONObject(0);
+
+        String cityFrom = Firstelem.getString("id");
+
+        if (cityFrom == null) {
+            //mainText.setText(R.string.city_not_found);
+        }
+        getCities(cityFrom);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
