@@ -151,6 +151,8 @@ public class StatusFragment extends Fragment {
 
                        String departureTime;
                        String arrivalTime;
+                       String departureTerminal;
+                       String arrivalTerminal;
                        String departureGate;
                        String arrivalGate;
                        String baggageGate;

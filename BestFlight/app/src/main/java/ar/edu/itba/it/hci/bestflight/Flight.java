@@ -11,10 +11,11 @@ public class Flight {
      Integer id; //airlineId+flightNumber
     String departureTime;
     String arrivalTime;
+    String departureTerminal;
+    String arrivalTerminal;
     String departureGate;
     String arrivalGate;
     String baggageGate;
-
 
 
    // public Flight( Integer flightNumber,String airline,String status, Integer id, String departureTime, String arrivalTime, String departureGate,
