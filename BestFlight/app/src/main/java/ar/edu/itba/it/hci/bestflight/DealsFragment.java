@@ -55,7 +55,7 @@ public class DealsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Toast.makeText(getActivity(), cities.get(position).toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.info, Toast.LENGTH_LONG).show();
             }
         });
 

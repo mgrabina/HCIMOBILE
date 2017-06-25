@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Best Flight</string>
     <string name="title_activity_main">Actividad Principal</string>
     <string name="title_maps">Mapa</string>
-
+    <string name="info">Para obtener mas informacion dirigirse a bestflight.com</string>
     <string name="navigation_drawer_open">Abrir Menu de Navegacion</string>
     <string name="navigation_drawer_close">Cerrar Menu de Navegacion</string>
     <string name="toast_error_gps">Hubo un error con el gps. Cargando ofertas desde BS AS</string>
@@ -19,11 +19,11 @@
     <string name="flight_number">Numero de vuelo</string>
     <string name="search">Buscar</string>
     <string name="alarmset">Alarma configurada</string>
-    <string name="alarmcanceled">Alarm cancelada</string>
+    <string name="alarmcanceled">Alarma cancelada</string>
     <string name="nolanguagehave">Lenguaje no disponible</string>
     <string name="toggle_notifications">Activar notificaciones</string>
     <string name="on">Encendido</string>
     <string name="off">Apagado</string>
-    <string name="loading">loading</string>
+    <string name="loading">Cargando</string>
     <string name="title_dealsMenu">Ofertas</string>
 </resources>

@@ -8,7 +8,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-
+    <string name="info">For more information go to betflight.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toast_error_gps">There is a problem with de gps. Loading deals from BS AS</string>

@@ -299,12 +299,12 @@ public class StatusFragment extends Fragment {
 
             AlertManager.removeAlert(flightA.id, getContext());
             fabAddNot.setImageResource(R.drawable.ic_plus_white_48dp);
-            Toast.makeText(getActivity(), "removed", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.alarmcanceled, Toast.LENGTH_LONG).show();
 
         } else {
             AlertManager.addAlert(flightA, getContext());
             fabAddNot.setImageResource(R.drawable.ic_minus_white_48dp);
-            Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.alarmset, Toast.LENGTH_LONG).show();
 
         }
     }
