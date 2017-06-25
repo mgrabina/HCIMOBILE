@@ -22,4 +22,6 @@
     <string name="nolanguagehave">language not found</string>
     <string name="flight_number">Flight Number</string>
     <string name="search">Search</string>
+    <string name="alarmset">Alarm Set</string>
+    <string name="alarmcanceled">Alarm Canceled</string>
 </resources>

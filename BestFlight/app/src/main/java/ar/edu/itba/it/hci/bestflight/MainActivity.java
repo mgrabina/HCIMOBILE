@@ -142,13 +142,13 @@ public class MainActivity extends AppCompatActivity
         long interval = notificationInterval; //the update is every minute minium
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-        Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.alarmset, Toast.LENGTH_SHORT).show();
     }
 
     public void cancel() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         manager.cancel(pendingIntent);
-        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.alarmcanceled, Toast.LENGTH_SHORT).show();
     }
 
     //
