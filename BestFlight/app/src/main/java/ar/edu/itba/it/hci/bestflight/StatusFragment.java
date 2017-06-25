@@ -16,11 +16,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -53,7 +56,7 @@ public class StatusFragment extends Fragment {
     AlertManager alertManager;
     Flight flightA;
 
-
+    TextView info;
 
 
 
@@ -77,6 +80,8 @@ public class StatusFragment extends Fragment {
 
         getAirlines();
 
+        info = (TextView) getView().findViewById(R.id.infoFlightET);
+
         airlinesMap = new HashMap<String, String>();
         airlines = new ArrayList<String>();
         alertManager = AlertManager.getInstance();
@@ -98,7 +103,7 @@ public class StatusFragment extends Fragment {
 
 
             resultLayout = (LinearLayout) getView().findViewById(R.id.resultLayout);
-            resultLayout.setVisibility(View.GONE);
+            resultLayout.setVisibility(View.INVISIBLE);
             fabAddNot = (FloatingActionButton) getView().findViewById(R.id.fabAddNot);
 
 
@@ -149,17 +154,18 @@ public class StatusFragment extends Fragment {
                        String id = response.getJSONObject("status").getString("id");
                        String flightNumber = response.getJSONObject("status").getString("number");
 
-                       String departureTime;
-                       String arrivalTime;
-                       String departureTerminal;
-                       String arrivalTerminal;
-                       String departureGate;
-                       String arrivalGate;
-                       String baggageGate;
+                       String departureTime = response.getJSONObject("status").getJSONObject("departure").getString("scheduled_time");
+                       String arrivalTime = response.getJSONObject("status").getJSONObject("arrival").getString("scheduled_time");
+                       String departureTerminal = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("terminal");
+                       String arrivalTerminal = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("terminal");
+                       String departureGate = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("gate");
+                       String arrivalGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("gate");
+                       String baggageGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("baggage");
 
 
 
-                       flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id));
+                       flightA = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id), departureTime,
+                               arrivalTime, departureTerminal, arrivalTerminal, departureGate, arrivalGate, baggageGate);
                        showResult();
 
                    }
@@ -237,34 +243,60 @@ public class StatusFragment extends Fragment {
 
     private void showResult(){
 
-        resultLayout.setVisibility(View.VISIBLE);
 
+        resultLayout.setVisibility(View.VISIBLE);
+        setFabImage();
+        String flightInfo = "my flight information";
+        info.setText(flightInfo);
+
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
 
     }
 
 
-    private void addNotification(){
+    private void addNotification() {
 
 
-        if( AlertManager.getNotificationsMap().containsKey(flightA.id)){
+        if (AlertManager.getNotificationsMap().containsKey(flightA.id)) {
 
             AlertManager.removeAlert(flightA.id, getContext());
-            fabAddNot.setImageResource(R.drawable.aiportgreen);
+            fabAddNot.setImageResource(R.drawable.ic_plus_white_48dp);
             Toast.makeText(getActivity(), "removed", Toast.LENGTH_LONG).show();
 
-        }
-        else{
+        } else {
             AlertManager.addAlert(flightA, getContext());
-            fabAddNot.setImageResource(R.drawable.aiportred);
+            fabAddNot.setImageResource(R.drawable.ic_minus_white_48dp);
             Toast.makeText(getActivity(), "added", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    private void setFabImage(){
 
 
+        if( AlertManager.getNotificationsMap().containsKey(flightA.id)){
+           // Log.d("SETFABIMAGE", "PLUS (contain)");
+            fabAddNot.setImageResource(R.drawable.ic_minus_white_48dp);
 
+
+        }
+        else{
+           // Log.d("SETFABIMAGE", "MINUS (notContain)");
+            fabAddNot.setImageResource(R.drawable.ic_plus_white_48dp);
+
+        }
 
 
     }
+
+
+
+
+
 
     public void setSearch(){
 

@@ -21,13 +21,14 @@
             android:id="@+id/airlinesSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/flightNumberET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
-            android:text="Flight Number" />
+            android:hint="Flight Number"
+            android:inputType="number" />
         <Button
             android:id="@+id/searchButton"
             android:layout_width="match_parent"
@@ -46,20 +47,20 @@
         android:layout_margin="5dp">
 
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+        <TextView
+            android:id="@+id/infoFlightET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fabAddNot"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:clickable="true"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabAddNot"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
 
-                app:fabSize="mini"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_minus_white_48dp" />
 
     </LinearLayout>
 
