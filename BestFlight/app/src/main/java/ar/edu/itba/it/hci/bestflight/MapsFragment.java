@@ -214,11 +214,13 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         String url = CITIES_STRING_BASE + location_stringEnd;
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(MainActivity.getLatitude(), MainActivity.getLongitud()));
+        //Toast.makeText(getActivity(), ""+MainActivity.getLatitude()+MainActivity.getLongitud(),Toast.LENGTH_LONG).show();
         BitmapDescriptor icon = null;
         Drawable d = getResources().getDrawable(R.drawable.mylocation);//cambiar a algun icono que sea desde
         Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
         icon = BitmapDescriptorFactory.fromBitmap(bitmap);
         m.icon(icon);
+        mMap.addMarker(m);
         CameraUpdateFactory.newLatLng(m.getPosition());
         CameraUpdateFactory.zoomBy(5);
         JsonObjectRequest
