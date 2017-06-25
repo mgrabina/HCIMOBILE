@@ -254,7 +254,23 @@ public class StatusFragment extends Fragment {
 
         resultLayout.setVisibility(View.VISIBLE);
         setFabImage();
-        String flightInfo = getString(R.string.airline) +flightA.airline + "\n" + getString(R.string.flightNumber)+ flightA.flightNumber + "\n" + getString(R.string.status)+ flightA.status +"\n\n" + getString(R.string.departure)+flightA.departureTime + "\n" + getString(R.string.terminal) +flightA.departureTerminal + ", "+ getString(R.string.gate) +flightA.departureGate + "\n" + getString(R.string.arrival) +flightA.arrivalTime + "\n" + getString(R.string.terminal) +flightA.arrivalTerminal + ", " + getString(R.string.gate) +flightA.arrivalGate + "\n" + getString(R.string.baggageGate) + flightA.baggageGate;
+
+        String status = flightA.status;
+
+        if(status.equals("S"))
+            status = getString(R.string.S);
+        else if(status.equals("A"))
+            status = getString(R.string.A);
+        else if(status.equals("R"))
+            status = getString(R.string.R);
+        else if(status.equals("L"))
+            status = getString(R.string.L);
+        else if(status.equals("C"))
+            status = getString(R.string.C);
+
+
+
+        String flightInfo = getString(R.string.airline) +flightA.airline + "\n" + getString(R.string.flightNumber)+ flightA.flightNumber + "\n" + getString(R.string.status)+ status +"\n\n" + getString(R.string.departure)+flightA.departureTime + "\n" + getString(R.string.terminal) +flightA.departureTerminal + ", "+ getString(R.string.gate) +flightA.departureGate + "\n" + getString(R.string.arrival) +flightA.arrivalTime + "\n" + getString(R.string.terminal) +flightA.arrivalTerminal + ", " + getString(R.string.gate) +flightA.arrivalGate + "\n" + getString(R.string.baggageGate) + flightA.baggageGate;
         info.setText(flightInfo);
 
         View view = getActivity().getCurrentFocus();

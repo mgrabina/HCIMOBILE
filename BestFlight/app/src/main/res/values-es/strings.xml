@@ -37,4 +37,10 @@
     <string name="gate">"Puerta: "</string>
     <string name="arrival">"arrivo: "</string>
     <string name="baggageGate">"Puerta de equipaje: "</string>
+
+    <string name="S">Programado</string>
+    <string name="A">Activo</string>
+    <string name="R">Desviado</string>
+    <string name="L">Aterrizado</string>
+    <string name="C">Cancelado</string>
 </resources>

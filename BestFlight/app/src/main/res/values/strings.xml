@@ -41,5 +41,11 @@
     <string name="arrival">"arrival: "</string>
     <string name="baggageGate">"Bagagge Gate: "</string>
 
+    <string name="S">Programmed</string>
+    <string name="A">Active</string>
+    <string name="R">Deflected</string>
+    <string name="L">Landed</string>
+    <string name="C">Canceled</string>
+
 
 </resources>
