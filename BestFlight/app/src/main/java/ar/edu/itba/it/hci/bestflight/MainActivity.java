@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        updateNotificationsMap();
+
         SettingsFragment.checkLanguage(Locale.getDefault().getLanguage(), this, null, null, this);      //Setea el lenguaje del dispositivo
         checkLocationPermission();
         setContentView(R.layout.activity_main);
@@ -84,17 +86,17 @@ public class MainActivity extends AppCompatActivity
 
 
     //
-        updateNotificationsMap();
+
 
         //Bundle bundl = new Bundle();
-        //bundl.putString("airlineId", "id");
+       // bundl.putString("airlineId", "id");
         //bundl.putInt("flightNumber", 0);
 
-       /* Bundle bundle = getIntent().getExtras();
-        getIntent().removeExtra("airline");
-        getIntent().removeExtra("flightNumber");
-        if(bundle != null){
 
+        if(getIntent().hasExtra("airline") && getIntent().hasExtra("flightNumber")){
+            Bundle bundle = getIntent().getExtras();
+            getIntent().removeExtra("airline");
+            getIntent().removeExtra("flightNumber");
            airlineSt = bundle.getString("airline");
             flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
 
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             fragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
 
-        }*/
+        }
 
         //Default Fragment cuando inicia
         if(!inicio) {

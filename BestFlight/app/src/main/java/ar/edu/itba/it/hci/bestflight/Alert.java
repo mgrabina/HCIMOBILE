@@ -9,9 +9,11 @@ public class Alert {
     private String status;
     private String airline;
 
+
     public Alert(Integer flight, String airline) {
         this.flight = flight;
         this.airline = airline;
+
         status = "default";
     }
 

@@ -50,7 +50,7 @@ public class AlertManager extends Application {
 
     public static void addAlert(Flight flight, Context context){
 
-        notificationsMap.put(flight.id, flight);
+        AlertManager.getNotificationsMap().put(flight.id, flight);
         //
 
 
@@ -68,18 +68,23 @@ public class AlertManager extends Application {
         alerts.add(new Alert(flight.flightNumber, flight.airline));
     }
 
+    public static void removeAlert(Integer id){
+
+
+
+    }
 
 
     public static void removeAlert(Integer id, Context context){
 
-        Flight fl = notificationsMap.get(id);
+        Flight fl = AlertManager.getNotificationsMap().get(id);
 
         //
-        Integer flightNumber = fl.flightNumber;
-        String airline = fl.airline;
+       Integer flightNumber = fl.flightNumber;
+       String airline = fl.airline;
         //
 
-        notificationsMap.remove(id);
+       AlertManager.getNotificationsMap().remove(id);
 
         Gson gson = new Gson();
         MapWrapper wrapper = new MapWrapper();
@@ -90,7 +95,7 @@ public class AlertManager extends Application {
 
 
 
-        //
+
         for(Alert a : alerts)
             if(a.equals(new Alert(flightNumber, airline)))
                 alerts.remove(a);
