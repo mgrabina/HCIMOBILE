@@ -14,26 +14,23 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    //private static boolean inicio = false;
+
 
     private long notificationInterval = 60000;
     private static FragmentManager fragmentManager;
@@ -45,14 +42,9 @@ public class MainActivity extends AppCompatActivity
     public static double getLongitud() {
         return tracker.getLongitude();
     }
-    //
+
     private PendingIntent pendingIntent;
 
-   // public boolean updated = false;
-
-
-   // String airlineSt = null;
-   // Integer flightNSt = null;
 
 
     @Override
@@ -84,23 +76,11 @@ public class MainActivity extends AppCompatActivity
         AlertManager.getInstance();
 
 
-
-    //
-
-
-        //Bundle bundl = new Bundle();
-       // bundl.putString("airlineId", "id");
-        //bundl.putInt("flightNumber", 0);
-
-
         if(getIntent().hasExtra("airline") && getIntent().hasExtra("flightNumber")){
 
             Bundle bundle = getIntent().getExtras();
             getIntent().removeExtra("airline");
             getIntent().removeExtra("flightNumber");
-           //airlineSt = bundle.getString("airline");
-           // flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
-
             Fragment fragment = new StatusFragment();
             fragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
@@ -112,13 +92,6 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
         }
 
-
-       /* if(!inicio) {
-            Fragment fragment = new DealsFragment();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
-            inicio = true;
-        }
-        */
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
         start();
@@ -127,9 +100,6 @@ public class MainActivity extends AppCompatActivity
         popBackstack();
         fragmentManager.beginTransaction().replace(R.id.content_frame, f, name).addToBackStack(name).commit();
     }
-
-    //
-    //
 
 
     public void setNotificationInterval(long number){
@@ -142,17 +112,15 @@ public class MainActivity extends AppCompatActivity
         long interval = notificationInterval; //the update is every minute minium
 
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-        Toast.makeText(this, R.string.alarmset, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, R.string.alarmset, Toast.LENGTH_SHORT).show();
     }
 
     public void cancel() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         manager.cancel(pendingIntent);
-        Toast.makeText(this, R.string.alarmcanceled, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, R.string.alarmcanceled, Toast.LENGTH_SHORT).show();
     }
 
-    //
-    //
 
 
 
@@ -185,7 +153,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_status) {
-            // Handle the camera action
+
             Fragment fragment = new StatusFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
         } else if (id == R.id.nav_deals) {
@@ -197,8 +165,6 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
         }else if (id == R.id.nav_map) {
-           // Intent i = new Intent(this, MapsActivity.class);
-           // startActivity(i);
             Fragment fragment = new MapsFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "mapsFragment").addToBackStack("mapsFragment").commit();
         }
@@ -215,13 +181,10 @@ public class MainActivity extends AppCompatActivity
                 Manifest.permission. ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission. ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
 
                 ActivityCompat.requestPermissions(MainActivity.this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -229,7 +192,7 @@ public class MainActivity extends AppCompatActivity
 
 
             } else {
-                // No explanation needed, we can request the permission.
+
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission. ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -258,27 +221,19 @@ public class MainActivity extends AppCompatActivity
 
     public void updateNotificationsMap(){
 
-       // updated=false;
-        Log.d("UPDATENOTIFICATIONMAP","UPDATE");
 
         String serializedMap = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("NotificationsMap", "empty");
 
         if(!serializedMap.equals("empty")) {
-            //Log.d("ENTRO", serializedMap);
             Gson gson = new Gson();
             MapWrapper wrapper = gson.fromJson(serializedMap, MapWrapper.class);
             HashMap<Integer, Flight> map = wrapper.myMap;
             AlertManager.setNotificationsMap(map);
 
-            //
             for(Integer id : map.keySet()){
                 Log.d("AEROLINEA: " + AlertManager.getNotificationsMap().get(id).airline, AlertManager.getNotificationsMap().get(id).baggageGate);
 
             }
-
-
-            //
-
 
             ArrayList<Alert> a = new ArrayList<Alert>();
             for(Integer id : AlertManager.getNotificationsMap().keySet()){
@@ -294,7 +249,7 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-       // updated = true;
+       
     }
 
 
