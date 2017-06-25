@@ -104,7 +104,7 @@ public class AlertsCheck extends BroadcastReceiver {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        
+
                         String status = response.getJSONObject("status").getString("status");
                         String airline = response.getJSONObject("status").getJSONObject("airline").getString("name");
                         String id = response.getJSONObject("status").getString("id");
