@@ -2,20 +2,15 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -63,7 +58,7 @@ public class DealsFragment extends Fragment {
 
     private void getDeals(final String citi) {
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
+        progressDialog.setMessage("Loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -78,7 +73,7 @@ public class DealsFragment extends Fragment {
 
                 try {
 
-                    // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
+
                     for (int i = 0; i < response.getJSONArray("deals").length(); i++) {
                         adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name")+" USD "+
                                 (response.getJSONArray("deals").getJSONObject(i)).getString("price"));
@@ -126,7 +121,7 @@ public class DealsFragment extends Fragment {
                     CityNearBy(response);
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), getString(R.string.toast_error_gps), Toast.LENGTH_LONG).show();
-//                    progressDialog.dismiss();
+
                     getDeals("BUE");
                     getActivity().setTitle(getResources().getString(R.string.title_deals) + "Buenos Aires");
 
@@ -137,7 +132,7 @@ public class DealsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
-               // progressDialog.dismiss();
+
 
             }
         });
@@ -157,7 +152,6 @@ public class DealsFragment extends Fragment {
         String cityFrom = Firstelem.getString("id");
 
         if (cityFrom == null) {
-            //mainText.setText(R.string.city_not_found);
 
             return;
         }
@@ -205,12 +199,5 @@ public class DealsFragment extends Fragment {
             progressDialog.dismiss();
         }
     }
-
-
-
-
-
-
-
 
 }

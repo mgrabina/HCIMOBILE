@@ -2,33 +2,23 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.app.Service;
 import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -55,17 +45,14 @@ public class AlertsCheck extends BroadcastReceiver {
         String serializedMap = PreferenceManager.getDefaultSharedPreferences(context).getString("NotificationsMap", "empty");
 
         if(!serializedMap.equals("empty")) {
-          // Log.d("ENTRO", serializedMap);
+
            Gson gson = new Gson();
            MapWrapper wrapper = gson.fromJson(serializedMap, MapWrapper.class);
            HashMap<Integer, Flight> map = wrapper.myMap;
            this.map = map;
             AlertManager.setNotificationsMap(map);
 
-
-
             checkChanges();
-           //startNotification();
        }
 
     }
@@ -77,7 +64,6 @@ public class AlertsCheck extends BroadcastReceiver {
 
         mapAux = new  HashMap<Integer, Flight>();
         mapAux.putAll(map);
-
         iterator = map.keySet().iterator();
 
         iterate();
@@ -128,17 +114,6 @@ public class AlertsCheck extends BroadcastReceiver {
                                 || !flightA.departureGate.equals(flightB.departureGate) || !flightA.arrivalGate.equals(flightB.arrivalGate)
                                 || !flightA.baggageGate.equals(flightB.baggageGate)) {
 
-
-                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.status + ", B: " + flightB.status);
-                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureTime + ", B: " + flightB.departureTime);
-                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalTime + ", B: " + flightB.arrivalTime);
-                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureTerminal + ", B: " + flightB.departureTerminal);
-                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalTerminal + ", B: " + flightB.arrivalTerminal);
-                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureGate + ", B: " + flightB.departureGate);
-                            //Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalGate + ", B: " + flightB.arrivalGate);
-                            //
-                            //flightB.baggageGate = "3";
-
                             mapAux.put(flightB.id, flightB);
 
                             Gson gson = new Gson();
@@ -147,10 +122,7 @@ public class AlertsCheck extends BroadcastReceiver {
                             String serializedMap = gson.toJson(wrapper);
 
                             PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
-
                             startNotification(flightB);
-
-
                         }
 
                         iterate();
@@ -175,54 +147,10 @@ public class AlertsCheck extends BroadcastReceiver {
     }
 
 
-    public void startNotification() {
-
-       // map = AlertManager.getNotificationsMap();
-
-        for (Integer id : map.keySet()) {
-
-            NotificationCompat.Builder mBuilder =
-                    new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.ic_airplane_grey600_48dp)
-                            .setContentTitle(map.get(id).airline + " - Flight: " + map.get(id).flightNumber)
-                            .setContentText("The flight status has been updated")
-                            .setAutoCancel(true);
-            // Creates an explicit intent for an Activity in your app
-            Intent resultIntent = new Intent(context, MainActivity.class);
-
-            String airline = map.get(id).airline;
-            String flightNumber = map.get(id).flightNumber.toString();
-            resultIntent.putExtra("airline", airline);
-            resultIntent.putExtra("flightNumber", flightNumber);
-
-            // The stack builder object will contain an artificial back stack for the
-            // started Activity.
-            // This ensures that navigating backward from the Activity leads out of
-            // your application to the Home screen.
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-            // Adds the back stack for the Intent (but not the Intent itself)
-            stackBuilder.addParentStack(MainActivity.class);
-            // Adds the Intent that starts the Activity to the top of the stack
-            stackBuilder.addNextIntent(resultIntent);
-
-            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent( id, PendingIntent.FLAG_UPDATE_CURRENT  );
-
-            mBuilder.setContentIntent(resultPendingIntent);
-
-            NotificationManager mNotificationManager =
-                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            // mId allows you to update the notification later on.
-            int mId = id;
-            mNotificationManager.notify(mId, mBuilder.build());
-        }
-    }
 
 
 
     public void startNotification(Flight flight) {
-
-        // map = AlertManager.getNotificationsMap();
-
 
 
         NotificationCompat.Builder mBuilder =
@@ -262,13 +190,44 @@ public class AlertsCheck extends BroadcastReceiver {
     }
 
 
+    //start a notification for all the following flights (is not used in the app)
+    public void startNotification() {
 
-    ///
-    ///
-    ///
-    //
-    //
-    //
-    //
-    //
+        for (Integer id : map.keySet()) {
+
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(context)
+                            .setSmallIcon(R.drawable.ic_airplane_grey600_48dp)
+                            .setContentTitle(map.get(id).airline + " - Flight: " + map.get(id).flightNumber)
+                            .setContentText("The flight status has been updated")
+                            .setAutoCancel(true);
+            // Creates an explicit intent for an Activity in your app
+            Intent resultIntent = new Intent(context, MainActivity.class);
+
+            String airline = map.get(id).airline;
+            String flightNumber = map.get(id).flightNumber.toString();
+            resultIntent.putExtra("airline", airline);
+            resultIntent.putExtra("flightNumber", flightNumber);
+
+            // The stack builder object will contain an artificial back stack for the
+            // started Activity.
+            // This ensures that navigating backward from the Activity leads out of
+            // your application to the Home screen.
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            // Adds the back stack for the Intent (but not the Intent itself)
+            stackBuilder.addParentStack(MainActivity.class);
+            // Adds the Intent that starts the Activity to the top of the stack
+            stackBuilder.addNextIntent(resultIntent);
+
+            PendingIntent resultPendingIntent = stackBuilder.getPendingIntent( id, PendingIntent.FLAG_UPDATE_CURRENT  );
+
+            mBuilder.setContentIntent(resultPendingIntent);
+
+            NotificationManager mNotificationManager =
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            // mId allows you to update the notification later on.
+            int mId = id;
+            mNotificationManager.notify(mId, mBuilder.build());
+        }
+    }
 }

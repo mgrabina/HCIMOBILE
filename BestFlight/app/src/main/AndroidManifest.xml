@@ -43,11 +43,6 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-
-        </activity>
         <receiver android:name=".AlertsCheck">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>

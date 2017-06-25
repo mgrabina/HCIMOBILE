@@ -51,8 +51,6 @@ public class AlertManager extends Application {
     public static void addAlert(Flight flight, Context context){
 
         AlertManager.getNotificationsMap().put(flight.id, flight);
-        //
-
 
         Gson gson = new Gson();
         MapWrapper wrapper = new MapWrapper();
@@ -62,9 +60,6 @@ public class AlertManager extends Application {
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
 
 
-
-
-        //
         alerts.add(new Alert(flight.flightNumber, flight.airline));
     }
 
@@ -79,10 +74,8 @@ public class AlertManager extends Application {
 
         Flight fl = AlertManager.getNotificationsMap().get(id);
 
-        //
        Integer flightNumber = fl.flightNumber;
        String airline = fl.airline;
-        //
 
        AlertManager.getNotificationsMap().remove(id);
 

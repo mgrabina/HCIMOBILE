@@ -13,21 +13,11 @@ public class Alert {
     public Alert(Integer flight, String airline) {
         this.flight = flight;
         this.airline = airline;
-
-       // status = "default";
     }
-
-   // public void setStatus(String status) {
-  //      this.status = status;
-   // }
-
-   // public String getStatus() {
-   //     return status;
-    //}
 
     @Override
     public String toString() {
-        return airline + " " + flight ;//+ " | " + status;
+        return airline + " " + flight ;
     }
 
     @Override

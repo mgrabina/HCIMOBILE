@@ -2,12 +2,10 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -20,18 +18,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -39,9 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback {
@@ -49,7 +40,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     static private HashMap<City, Double> cities;
     private GoogleMap mMap;
     MapView mapView;
-    //List<MarkerOptions> markers;
+
 
 
 
@@ -80,16 +71,9 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         cities = new HashMap<City, Double>();
-        //markers = new ArrayList<MarkerOptions>();
-        getActivity().setTitle(getResources().getString(R.string.title_maps));
-        //setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-       // SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-       //         .findFragmentById(R.id.map);
-      // MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.content_frame);
-        //MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.fragmentm);
 
-       // mapFragment.getMapAsync(this);
+        getActivity().setTitle(getResources().getString(R.string.title_maps));
+
 
     }
 
@@ -112,10 +96,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
 
 
-       // mMap.moveCamera(CameraUpdateFactory.zoomBy(0));
-
-
-
     }
     private void getCities(String locationFrom) {
         progressDialog = new ProgressDialog(getActivity());
@@ -132,7 +112,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
                 try {
 
-                    // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
                     for(int i=0; i<response.getJSONArray("deals").length(); i++) {
                         String countryId = (response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getJSONObject("country").getString("id");
                         String id = (response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("id");
@@ -228,7 +207,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         m.position(new LatLng(MainActivity.getLatitude(), MainActivity.getLongitud()));
         //Toast.makeText(getActivity(), ""+MainActivity.getLatitude()+MainActivity.getLongitud(),Toast.LENGTH_LONG).show();
         BitmapDescriptor icon = null;
-        Drawable d = getResources().getDrawable(R.drawable.mylocation);//cambiar a algun icono que sea desde
+        Drawable d = getResources().getDrawable(R.drawable.mylocation);
         Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
         icon = BitmapDescriptorFactory.fromBitmap(bitmap);
         m.icon(icon);
@@ -244,7 +223,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), getString(R.string.toast_error_gps), Toast.LENGTH_LONG).show();
                     getCities("BUE");
-//                    progressDialog.dismiss();
+
 
 
                 }
@@ -253,7 +232,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_LONG).show();
-                // progressDialog.dismiss();
+
 
             }
         });
@@ -273,19 +252,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         String cityFrom = Firstelem.getString("id");
 
         if (cityFrom == null) {
-            //mainText.setText(R.string.city_not_found);
+
         }
         getCities(cityFrom);
 
     }
-
-
-
-
-
-
-
-
 
 
 

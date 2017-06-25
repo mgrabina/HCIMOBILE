@@ -5,10 +5,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,15 +17,13 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static android.widget.Toast.LENGTH_LONG;
+
 
 
 public class SettingsFragment extends Fragment {
@@ -48,14 +44,6 @@ public class SettingsFragment extends Fragment {
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
     }
-   // public Integer getInterval() {
-   //     return intervalos[interval];
-    //}
-
-   // public static boolean getNotifications() {
-   //     return getNotificaciones;
-   // }
-
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,18 +70,18 @@ public class SettingsFragment extends Fragment {
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Si selecciono uno
+                //when is selected
                 interval = intervalos[position];
 
                 ((MainActivity)getActivity()).setNotificationInterval(interval * 60000);
 
-                Toast.makeText(getActivity(), getString(R.string.interval_change_toast)+(intervalos[position]).toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), getString(R.string.interval_change_toast)+(intervalos[position]).toString(), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //Si no debo agarrar el que tenia
+
                 parent.setSelection(interval);
             }
         });
@@ -142,9 +130,6 @@ public class SettingsFragment extends Fragment {
                     EN = true;
                 }
 
-
-                //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");      //Si idioma no en todos lados
-                //Intento reiniciarla
                 Intent i = getActivity().getBaseContext().getPackageManager()
                         .getLaunchIntentForPackage( getActivity().getBaseContext().getPackageName() );
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -160,10 +145,6 @@ public class SettingsFragment extends Fragment {
         alertsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Si clickeo un item.
-                //Borrar item
-                //AlertManager.removeAlert(position);
-                //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
 
                 String airline = alerts.get(position).getAirline();
                 String flightNumber = alerts.get(position).getFlight().toString();
@@ -211,7 +192,7 @@ public class SettingsFragment extends Fragment {
             if(current != null)
                 MainActivity.rebootFragment(current, currentFragment);
         }else{
-            //No tengo ese idioma, ingles default
+            //english by default
         }
 
 

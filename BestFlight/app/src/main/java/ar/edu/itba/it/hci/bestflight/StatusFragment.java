@@ -1,24 +1,15 @@
 package ar.edu.itba.it.hci.bestflight;
 
 import android.app.FragmentManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.app.TaskStackBuilder;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,7 +24,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,8 +50,6 @@ public class StatusFragment extends Fragment {
 
     TextView info;
 
-    //
-    //
     Fragment thisFragment;
 
 
@@ -126,8 +114,7 @@ public class StatusFragment extends Fragment {
                 });
 
             }
-        //
-        //
+
         thisFragment = this;
 
     }
@@ -138,7 +125,7 @@ public class StatusFragment extends Fragment {
 
     private void checkStatus(){
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
+        progressDialog.setMessage("loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -147,7 +134,7 @@ public class StatusFragment extends Fragment {
 
         String  url = "http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" +airline+ "&flight_number=" + flightN ;
 
-        //Log.d("url", url);
+
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -204,7 +191,7 @@ public class StatusFragment extends Fragment {
 
     private void getAirlines() {
         progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
+        progressDialog.setMessage("loading");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -217,7 +204,7 @@ public class StatusFragment extends Fragment {
 
                 try {
 
-                    // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
+
                    for(int i=0; i<response.getJSONArray("airlines").length(); i++) {
 
                        airlinesMap.put(response.getJSONArray("airlines").getJSONObject(i).getString("name"),response.getJSONArray("airlines").getJSONObject(i).getString("id") );
@@ -229,7 +216,7 @@ public class StatusFragment extends Fragment {
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     airlinesSpinner.setAdapter(adapter);
 
-                    //setSearch();
+
                     if(thisFragment.getArguments() != null){
 
                         String airline = thisFragment.getArguments().getString("airline");
@@ -241,7 +228,7 @@ public class StatusFragment extends Fragment {
 
                         searchButton.performClick();
                     }
-                    ////
+
 
                     progressDialog.dismiss();
                 } catch (JSONException e) {
@@ -258,7 +245,7 @@ public class StatusFragment extends Fragment {
             }
         });
         RequestsManager.getInstance(getActivity()).addToRequestQueue(jsObjRequest);
-        //progressDialog.dismiss();
+
     }
 
 
@@ -281,20 +268,7 @@ public class StatusFragment extends Fragment {
 
     private void addNotification() {
 
-    /*
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("loading"); // SETEAR LOS STRINGS Y LLAMARLOS TIPO getActivity().getString(R.string.loading_airlines)
-        progressDialog.setCancelable(false);
-        progressDialog.show();
 
-
-
-        while( !((MainActivity)getActivity()).updated ){
-            Log.d("acatpy","acatoy");
-        }
-
-        progressDialog.dismiss();
-    */
         if (AlertManager.getNotificationsMap().containsKey(flightA.id)) {
 
             AlertManager.removeAlert(flightA.id, getContext());
@@ -313,13 +287,10 @@ public class StatusFragment extends Fragment {
 
 
         if( AlertManager.getNotificationsMap().containsKey(flightA.id)){
-           // Log.d("SETFABIMAGE", "PLUS (contain)");
+
             fabAddNot.setImageResource(R.drawable.ic_minus_white_48dp);
-
-
         }
         else{
-           // Log.d("SETFABIMAGE", "MINUS (notContain)");
             fabAddNot.setImageResource(R.drawable.ic_plus_white_48dp);
 
         }
@@ -327,28 +298,6 @@ public class StatusFragment extends Fragment {
 
     }
 
-
-
-
-
-
-    /*public void setSearch(){
-
-        if(this.getArguments() != null){
-
-            String airline = this.getArguments().getString("airline");
-
-            int position = airlines.indexOf(airline);
-            airlinesSpinner.setSelection(position);
-
-            flightNumberET.setText(this.getArguments().getString("flightNumber"));
-
-            searchButton.performClick();
-
-
-        }
-
-    }*/
 
     @Override
     public void onStop() {
