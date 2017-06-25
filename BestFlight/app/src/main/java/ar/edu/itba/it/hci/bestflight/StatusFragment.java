@@ -76,6 +76,7 @@ public class StatusFragment extends Fragment {
         FragmentManager fragmentManager;
         fragmentManager = getFragmentManager();
         Fragment fragment = new StatusFragment();
+        fragmentManager.popBackStack ("statusFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
 
     }

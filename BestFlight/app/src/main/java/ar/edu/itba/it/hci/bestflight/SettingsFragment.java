@@ -66,6 +66,7 @@ public class SettingsFragment extends Fragment {
         FragmentManager fragmentManager;
         fragmentManager = getFragmentManager();
         Fragment fragment = new SettingsFragment();
+        fragmentManager.popBackStack ("settingsFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "settingsFragment").addToBackStack("settingsFragment").commit();
 
     }

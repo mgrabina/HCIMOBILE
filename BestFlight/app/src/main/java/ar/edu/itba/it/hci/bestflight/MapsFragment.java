@@ -70,6 +70,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         FragmentManager fragmentManager;
         fragmentManager = getFragmentManager();
         Fragment fragment = new MapsFragment();
+        fragmentManager.popBackStack ("mapsFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "mapsFragment").addToBackStack("mapsFragment").commit();
 
     }

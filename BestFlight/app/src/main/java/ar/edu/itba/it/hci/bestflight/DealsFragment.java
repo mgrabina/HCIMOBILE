@@ -171,6 +171,7 @@ public class DealsFragment extends Fragment {
         FragmentManager fragmentManager;
         fragmentManager = getFragmentManager();
         Fragment fragment = new DealsFragment();
+        fragmentManager.popBackStack ("dealsFragment", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
 
     }
