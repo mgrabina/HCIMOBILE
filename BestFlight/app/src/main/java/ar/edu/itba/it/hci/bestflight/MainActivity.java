@@ -2,19 +2,15 @@ package ar.edu.itba.it.hci.bestflight;
 
 import android.Manifest;
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -165,7 +161,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
 
         Integer count = getFragmentManager().getBackStackEntryCount();
-        Log.d("BACKPRESSED", count.toString());
+
         if (count == 1) {
             finish();
         } else {
