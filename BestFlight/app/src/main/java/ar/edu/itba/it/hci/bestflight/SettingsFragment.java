@@ -123,9 +123,24 @@ public class SettingsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Si clickeo un item.
                 //Borrar item
-                AlertManager.removeAlert(position);
-                MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
+                //AlertManager.removeAlert(position);
+                //MainActivity.rebootFragment(new SettingsFragment(), "settingsFragment");
                 
+                String airline = alerts.get(position).getAirline();
+                String flightNumber = alerts.get(position).getFlight().toString();
+
+                getActivity().getIntent().putExtra("airline", airline);
+                getActivity().getIntent().putExtra("flightNumber", flightNumber);
+
+                Bundle bundle = getActivity().getIntent().getExtras();
+
+                getActivity().getIntent().removeExtra("airline");
+                getActivity().getIntent().removeExtra("flightNumber");
+
+                Fragment fragment = new StatusFragment();
+                fragment.setArguments(bundle);
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
+
             }
         });
 

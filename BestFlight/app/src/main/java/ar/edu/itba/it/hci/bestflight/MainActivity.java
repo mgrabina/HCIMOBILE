@@ -37,7 +37,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static boolean inicio = false;
+    //private static boolean inicio = false;
 
     private static FragmentManager fragmentManager;
     private static GPSTracker tracker;
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity
     private PendingIntent pendingIntent;
 
 
-    String airlineSt = null;
-    Integer flightNSt = null;
+   // String airlineSt = null;
+   // Integer flightNSt = null;
 
 
     @Override
@@ -94,24 +94,30 @@ public class MainActivity extends AppCompatActivity
 
 
         if(getIntent().hasExtra("airline") && getIntent().hasExtra("flightNumber")){
+
             Bundle bundle = getIntent().getExtras();
             getIntent().removeExtra("airline");
             getIntent().removeExtra("flightNumber");
-           airlineSt = bundle.getString("airline");
-            flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
+           //airlineSt = bundle.getString("airline");
+           // flightNSt = Integer.parseInt(bundle.getString("flightNumber"));
 
             Fragment fragment = new StatusFragment();
             fragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "statusFragment").addToBackStack("statusFragment").commit();
 
         }
+       else{
+            Fragment fragment = new DealsFragment();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
+        }
 
-        //Default Fragment cuando inicia
-        if(!inicio) {
+
+       /* if(!inicio) {
             Fragment fragment = new DealsFragment();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, "dealsFragment").addToBackStack("dealsFragment").commit();
             inicio = true;
         }
+        */
         Intent alarmIntent = new Intent(MainActivity.this, AlertsCheck.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, 0);
         cancel();
@@ -246,7 +252,13 @@ public class MainActivity extends AppCompatActivity
 
             ArrayList<Alert> a = new ArrayList<Alert>();
             for(Integer id : AlertManager.getNotificationsMap().keySet()){
-                AlertManager.getAlerts().add(new Alert(AlertManager.getNotificationsMap().get(id).flightNumber, AlertManager.getNotificationsMap().get(id).airline) );
+                Alert alert = new Alert(AlertManager.getNotificationsMap().get(id).flightNumber, AlertManager.getNotificationsMap().get(id).airline);
+                if(AlertManager.getAlerts().contains(alert)){
+
+                }
+                else{
+                    AlertManager.getAlerts().add(alert );
+                }
 
             }
 

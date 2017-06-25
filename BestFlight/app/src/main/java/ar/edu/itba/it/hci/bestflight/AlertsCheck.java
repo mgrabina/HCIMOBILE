@@ -67,7 +67,8 @@ public class AlertsCheck extends BroadcastReceiver {
                     new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.ic_menu_camera)
                             .setContentTitle("My notification")
-                            .setContentText("Hello Waldo!");
+                            .setContentText("Hello Waldo!")
+                            .setAutoCancel(true);
             // Creates an explicit intent for an Activity in your app
             Intent resultIntent = new Intent(context, MainActivity.class);
 
