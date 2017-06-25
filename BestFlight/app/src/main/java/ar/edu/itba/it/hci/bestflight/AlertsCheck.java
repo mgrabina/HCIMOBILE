@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by Santiago on 6/23/2017.
@@ -40,6 +42,10 @@ public class AlertsCheck extends BroadcastReceiver {
     HashMap<Integer, Flight> map;
     Flight flightA;
     Context context;
+
+    HashMap<Integer, Flight> mapAux;
+
+    Iterator<Integer> iterator;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -56,11 +62,12 @@ public class AlertsCheck extends BroadcastReceiver {
            this.map = map;
             AlertManager.setNotificationsMap(map);
 
+
+
             checkChanges();
            //startNotification();
        }
-       //else
-       //     Log.d("NO-ENTRO", serializedMap);
+
     }
 
 
@@ -68,65 +75,88 @@ public class AlertsCheck extends BroadcastReceiver {
 
     private void checkChanges(){
 
-        final HashMap<Integer, Flight> mapAux = new  HashMap<Integer, Flight>();
+        mapAux = new  HashMap<Integer, Flight>();
         mapAux.putAll(map);
 
-        for (Integer id : map.keySet()) {
+        iterator = map.keySet().iterator();
+
+        iterate();
+
+    }
+
+
+
+
+    private void iterate(){
+
+        if (iterator.hasNext()) {
+
+            Integer id = iterator.next();
 
             flightA = map.get(id);
-            String airline = flightA.airline;
+            String airlineId = flightA.airlineId;
             String flightN = flightA.flightNumber.toString();
 
-            String url = "http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airline + "&flight_number=" + flightN;
-
-            //Log.d("url", url);
+            String url = "http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airlineId + "&flight_number=" + flightN;
 
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
-
                     try {
+                        
+                        String status = response.getJSONObject("status").getString("status");
+                        String airline = response.getJSONObject("status").getJSONObject("airline").getString("name");
+                        String id = response.getJSONObject("status").getString("id");
+                        String flightNumber = response.getJSONObject("status").getString("number");
 
-                            String status = response.getJSONObject("status").getString("status");
-                            String airline = response.getJSONObject("status").getJSONObject("airline").getString("name");
-                            String id = response.getJSONObject("status").getString("id");
-                            String flightNumber = response.getJSONObject("status").getString("number");
+                        String departureTime = response.getJSONObject("status").getJSONObject("departure").getString("scheduled_time");
+                        String arrivalTime = response.getJSONObject("status").getJSONObject("arrival").getString("scheduled_time");
+                        String departureTerminal = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("terminal");
+                        String arrivalTerminal = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("terminal");
+                        String departureGate = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("gate");
+                        String arrivalGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("gate");
+                        String baggageGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("baggage");
 
-                            String departureTime = response.getJSONObject("status").getJSONObject("departure").getString("scheduled_time");
-                            String arrivalTime = response.getJSONObject("status").getJSONObject("arrival").getString("scheduled_time");
-                            String departureTerminal = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("terminal");
-                            String arrivalTerminal = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("terminal");
-                            String departureGate = response.getJSONObject("status").getJSONObject("departure").getJSONObject("airport").getString("gate");
-                            String arrivalGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("gate");
-                            String baggageGate = response.getJSONObject("status").getJSONObject("arrival").getJSONObject("airport").getString("baggage");
+                        String airlineId = response.getJSONObject("status").getJSONObject("airline").getString("id");
 
+                        Flight flightB = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id), departureTime,
+                                arrivalTime, departureTerminal, arrivalTerminal, departureGate, arrivalGate, baggageGate, airlineId);
 
-                            Flight flightB = new Flight(Integer.parseInt(flightNumber), airline, status, Integer.parseInt(id), departureTime,
-                                    arrivalTime, departureTerminal, arrivalTerminal, departureGate, arrivalGate, baggageGate);
-
-                            if( !flightA.status.equals(flightB.status) || !flightA.departureTime.equals(flightB.departureTime) || !flightA.arrivalTime.equals(flightB.arrivalTime)
-                                    || !flightA.departureTerminal.equals(flightB.departureTerminal) || !flightA.arrivalTerminal.equals(flightB.arrivalTerminal)
-                                    || !flightA.departureGate.equals(flightB.departureGate) || !flightA.arrivalGate.equals(flightB.arrivalGate)
-                                    || !flightA.baggageGate.equals(flightB.baggageGate)){
-
-
-                                mapAux.put(flightB.id, flightB);
-
-                                Gson gson = new Gson();
-                                MapWrapper wrapper = new MapWrapper();
-                                wrapper.myMap = mapAux;
-                                String serializedMap = gson.toJson(wrapper);
-
-                                PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
-
-                                startNotification(flightB);
+                        if (!flightA.status.equals(flightB.status) || !flightA.departureTime.equals(flightB.departureTime) || !flightA.arrivalTime.equals(flightB.arrivalTime)
+                                || !flightA.departureTerminal.equals(flightB.departureTerminal) || !flightA.arrivalTerminal.equals(flightB.arrivalTerminal)
+                                || !flightA.departureGate.equals(flightB.departureGate) || !flightA.arrivalGate.equals(flightB.arrivalGate)
+                                || !flightA.baggageGate.equals(flightB.baggageGate)) {
 
 
-                            }
+                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.status + ", B: " + flightB.status);
+                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureTime + ", B: " + flightB.departureTime);
+                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalTime + ", B: " + flightB.arrivalTime);
+                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureTerminal + ", B: " + flightB.departureTerminal);
+                           // Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalTerminal + ", B: " + flightB.arrivalTerminal);
+                          //  Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.departureGate + ", B: " + flightB.departureGate);
+                            //Log.d("ENTRO AEROLINEA:" + flightA.airline, "A: " + flightA.arrivalGate + ", B: " + flightB.arrivalGate);
+                            //
+                            //flightB.baggageGate = "3";
+
+                            mapAux.put(flightB.id, flightB);
+
+                            Gson gson = new Gson();
+                            MapWrapper wrapper = new MapWrapper();
+                            wrapper.myMap = mapAux;
+                            String serializedMap = gson.toJson(wrapper);
+
+                            PreferenceManager.getDefaultSharedPreferences(context).edit().putString("NotificationsMap", serializedMap).commit();
+
+                            startNotification(flightB);
+
+
+                        }
+
+                        iterate();
 
                     } catch (JSONException e) {
-
+                        Log.e("ERROR", "JSONEXCEPTION");
 
                     }
 
@@ -134,16 +164,15 @@ public class AlertsCheck extends BroadcastReceiver {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    Log.e("ERROR", "VOLLEYERROR");
 
                 }
             });
             RequestsManager.getInstance(context).addToRequestQueue(jsObjRequest);
-
-
         }
-    }
 
+
+    }
 
 
     public void startNotification() {

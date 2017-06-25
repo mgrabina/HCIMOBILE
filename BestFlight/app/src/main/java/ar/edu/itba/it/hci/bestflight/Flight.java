@@ -8,7 +8,7 @@ public class Flight {
      Integer flightNumber;
      String status;
      String airline;
-     Integer id; //airlineId+flightNumber
+     Integer id;
     String departureTime;
     String arrivalTime;
     String departureTerminal;
@@ -16,10 +16,11 @@ public class Flight {
     String departureGate;
     String arrivalGate;
     String baggageGate;
+    String airlineId;
 
 
     public Flight( Integer flightNumber,String airline,String status, Integer id, String departureTime, String arrivalTime,
-                   String departureTerminal, String arrivalTerminal, String departureGate, String arrivalGate, String baggageGate){
+                   String departureTerminal, String arrivalTerminal, String departureGate, String arrivalGate, String baggageGate, String airlineId){
 
         this.flightNumber = flightNumber;
         this.status = status;
@@ -32,6 +33,7 @@ public class Flight {
         this.departureGate = departureGate;
         this.arrivalGate = arrivalGate;
         this.baggageGate = baggageGate;
+        this.airlineId = airlineId;
 
 
     }

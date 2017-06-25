@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         updateNotificationsMap();
 
+
         SettingsFragment.checkLanguage(Locale.getDefault().getLanguage(), this, null, null, this);      //Setea el lenguaje del dispositivo
         checkLocationPermission();
         setContentView(R.layout.activity_main);
@@ -252,6 +253,7 @@ public class MainActivity extends AppCompatActivity
     public void updateNotificationsMap(){
 
        // updated=false;
+        Log.d("UPDATENOTIFICATIONMAP","UPDATE");
 
         String serializedMap = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("NotificationsMap", "empty");
 
@@ -261,6 +263,16 @@ public class MainActivity extends AppCompatActivity
             MapWrapper wrapper = gson.fromJson(serializedMap, MapWrapper.class);
             HashMap<Integer, Flight> map = wrapper.myMap;
             AlertManager.setNotificationsMap(map);
+
+            //
+            for(Integer id : map.keySet()){
+                Log.d("AEROLINEA: " + AlertManager.getNotificationsMap().get(id).airline, AlertManager.getNotificationsMap().get(id).baggageGate);
+
+            }
+
+
+            //
+
 
             ArrayList<Alert> a = new ArrayList<Alert>();
             for(Integer id : AlertManager.getNotificationsMap().keySet()){
