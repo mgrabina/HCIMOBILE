@@ -53,7 +53,7 @@ public class SettingsFragment extends Fragment {
 
         super.onActivityCreated(savedInstanceState);
 
-        getActivity().setTitle(getResources().getString(R.string.settings_title));
+        getActivity().setTitle(getString(R.string.settings_title));
 
         final Spinner s = (Spinner) getActivity().findViewById(R.id.selectorDeTiempo);
         this.intervalos = new Integer[]{
