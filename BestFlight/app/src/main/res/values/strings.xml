@@ -15,7 +15,7 @@
     <string name="language_selector_text">Cambiar idioma a español</string>
     <string name="interval_message_settings">Select an interval of time between notifications</string>
     <string name="settings_title">Settings</string>
-    <string name="title_deals">Deals</string>
+    <string name="title_deals">Deals from </string>
     <string name="status_title">Status</string>
     <string name="language_change_notification">Language changed to english</string>
     <string name="interval_change_toast">Interval changed to</string>

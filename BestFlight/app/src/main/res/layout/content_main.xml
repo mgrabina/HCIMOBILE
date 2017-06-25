@@ -11,14 +11,13 @@
 
     <FrameLayout
         android:id="@+id/content_frame"
-        android:layout_width="385dp"
-        android:layout_height="518dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-4dp">
+        android:layout_width="426dp"
+        android:layout_height="685dp"
+        android:layout_marginBottom="-53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-8dp">
 
     </FrameLayout>
-
-
 
 
 </android.support.constraint.ConstraintLayout>

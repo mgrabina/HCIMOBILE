@@ -45,7 +45,6 @@ public class DealsFragment extends Fragment {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getActivity().setTitle(getResources().getString(R.string.title_deals));
         ListView l = (ListView) getActivity().findViewById(R.id.list);
         adapter=new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
         l.setAdapter(adapter);
@@ -79,7 +78,7 @@ public class DealsFragment extends Fragment {
 
                     // ACA SE TRABAJA CON LOS ELEMENTOS DEL JSON
                     for (int i = 0; i < response.getJSONArray("deals").length(); i++) {
-                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name")+" "+
+                        adapter.add((response.getJSONArray("deals").getJSONObject(i)).getJSONObject("city").getString("name")+" USD "+
                                 (response.getJSONArray("deals").getJSONObject(i)).getString("price"));
                     }
                     progressDialog.dismiss();
@@ -127,6 +126,7 @@ public class DealsFragment extends Fragment {
                     Toast.makeText(getActivity(), getString(R.string.toast_error_gps), Toast.LENGTH_LONG).show();
 //                    progressDialog.dismiss();
                     getDeals("BUE");
+                    getActivity().setTitle(getResources().getString(R.string.title_deals) + "Buenos Aires");
 
 
                 }
@@ -156,9 +156,10 @@ public class DealsFragment extends Fragment {
 
         if (cityFrom == null) {
             //mainText.setText(R.string.city_not_found);
+
             return;
         }
-
+        getActivity().setTitle(getResources().getString(R.string.title_deals) +" "+ Firstelem.getString("name"));
         getDeals(cityFrom);
 
     }
